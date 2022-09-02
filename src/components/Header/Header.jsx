@@ -19,11 +19,12 @@ const HeaderStyle = styled.header`
   height: 10vh;
   padding: 10px 15px;
   span {
-    font-size: 36px;
+    font-size: 20px;
     color: white;
     background-color: #4B89DC;
-    border-radius: 10px;
-    
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
   }
 `;
 
