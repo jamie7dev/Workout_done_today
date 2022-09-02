@@ -1,7 +1,11 @@
 import React from "react";
-const Login = () => {
+import Login from '../components/Form/Login';
+
+const login = () => {
 	return (
-    	<div>Login입니다</div>
+    	<div>
+				<Login />
+			</div>
     );
 };
-export default Login;
+export default login;
