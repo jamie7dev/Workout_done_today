@@ -24,7 +24,7 @@ const Login = () => {
 
   const fetchLogin = async () => {
     const { data } = await axios.get("http://localhost:3001/userinfo");
-    setInputValue(data); // 서버로부터 fetching한 데이터를 useState의 state로 set 합니다.
+     // 서버로부터 fetching한 데이터를 useState의 state로 set 합니다.
   };
 
 
@@ -36,7 +36,7 @@ const Login = () => {
   
 
   const onChangeHandler = (e) => {
-    const { name, value } = e.target.value;
+    const { name, value } = e.target;
     setInputValue({ ...inputValue, [name]: value })
   };
 
@@ -50,6 +50,7 @@ const Login = () => {
       loggedIn: true
     }));
     setInputValue(initialState);
+
     console.log(inputValue);
   };
   
