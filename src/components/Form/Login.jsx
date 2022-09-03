@@ -1,44 +1,95 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/modules/userSlice";
 
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  
+  // const [username, setUsername] = useState("");
+  // const [password, setPassword] = useState("");
 
-  const [inputValue, setInputValue] = useState({
+  const initialState = {
     username: "",
     password: ""
-  })
+  }
 
-  const inputChangeHandler = (event) => {
-    const { name, value } = event.target.value;
+  const [inputValue, setInputValue] = useState(initialState);
+
+
+  const fetchLogin = async () => {
+    const { data } = await axios.get("http://localhost:3001/userinfo");
+    setInputValue(data); // 서버로부터 fetching한 데이터를 useState의 state로 set 합니다.
+  };
+
+
+  useEffect(() => {
+		// effect 구문에 생성한 함수를 넣어 실행합니다.
+    fetchLogin();
+  }, []);
+
+  
+
+  const onChangeHandler = (e) => {
+    const { name, value } = e.target.value;
     setInputValue({ ...inputValue, [name]: value })
   };
 
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    // if (user.username.trim() === "") return alert("id를 입력해주세요!");
+
+    dispatch(login({...inputValue,
+      username: inputValue.username,
+      password: inputValue.password,
+      loggedIn: true
+    }));
+    setInputValue(initialState);
+    console.log(inputValue);
+  };
+  
+
+ 
+
   return (
     <>
+    <form onSubmit={onSubmitHandler}>
       <StLoginContainer>
-      <Link to="/"><span>home</span></Link>
+        <Link to="/"><span>home</span></Link>
         <StLoginBox>
           <StLoginHeader>
             <h1> 오늘 운동 완료했니? </h1>
           </StLoginHeader>
-          <div>
-            <label>ID</label>
-            <input type="text" name="username" onChange={inputChangeHandler} />
-          </div>
-          <div>
-            <label>PW</label>
-            <input type="password" name="password" onChange={inputChangeHandler} />
-          </div>
-          <div>
-            <button onClick={() => {navigate(`/`, { replace: true })}}>로그인</button>
-            <button onClick={()=>{navigate(`/form`)}}>회원가입</button>
-          </div>        
-        </StLoginBox>
-      </StLoginContainer>      
+            <div className="username-box">
+              <label htmlFor="username">ID</label>
+              <input 
+              type="text"
+              name="username"
+              value={inputValue.username}
+              onChange={onChangeHandler}
+              />
+            </div>
+            <div className="password-box">
+              <label htmlFor="password">PW</label>
+              <input 
+              type="password"
+              name="password"
+              value={inputValue.password}
+              onChange={onChangeHandler}
+              />
+            </div>
+            <div className="btns">
+              <button>로그인</button>
+              <button onClick={()=>{navigate(`/form`)}}>회원가입</button>
+            </div> 
+          </StLoginBox>
+        </StLoginContainer>   
+      </form>   
     </>
   );
 };

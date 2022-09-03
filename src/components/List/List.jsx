@@ -8,18 +8,21 @@ const List = () => {
     <StListContainer>
       <StListCard>
         <StListImage>이미지</StListImage>
+        <p>(조회수)</p>
         <StListTitle>제목</StListTitle>
         <StUser>username</StUser>
         <StTime>날짜</StTime>
       </StListCard>    
       <StListCard>
         <StListImage>이미지</StListImage>
+        <p>(조회수)</p>
         <StListTitle>제목</StListTitle>
         <StUser>username</StUser>
         <StTime>날짜</StTime>
       </StListCard>    
       <StListCard>
         <StListImage>이미지</StListImage>
+        <p>(조회수)</p>
         <StListTitle>제목</StListTitle>
         <StUser>username</StUser>
         <StTime>날짜</StTime>
@@ -47,15 +50,17 @@ const StListCard = styled.div`
   width: 300px;
   height: 400px;
   margin-top: 100px;
+  p {
+    margin: 10px 40px;
+  }
 `;
 
 const StListImage = styled.div`
   border: 1px solid #4B89DC;
   width: 220px;
   height: 200px;
-  margin: 40px;
+  margin: 40px 40px 0 40px;
   padding-top: 10px;
-
 `;
 
 const StListTitle = styled.div`
