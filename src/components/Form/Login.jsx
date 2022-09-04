@@ -11,8 +11,6 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   
-  // const [username, setUsername] = useState("");
-  // const [password, setPassword] = useState("");
 
   const initialState = {
     username: "",
@@ -42,7 +40,8 @@ const Login = () => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    // if (user.username.trim() === "") return alert("id를 입력해주세요!");
+    if (inputValue.username.trim() === "") return alert("아이디를 입력해주세요!");
+    if (inputValue.password.trim() === "") return alert("패스워드를 입력해주세요!");
 
     dispatch(login({...inputValue,
       username: inputValue.username,
@@ -126,5 +125,7 @@ const StLoginHeader = styled.div`
   text-align: center;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-   
+  h1 {
+    line-height: 50px;
+  }
 `;
