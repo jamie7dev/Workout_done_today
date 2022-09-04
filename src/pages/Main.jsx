@@ -1,12 +1,14 @@
 import React from "react";
-import List from "../components/List/List";
+import Header from '../components/Header/Header';
+import List from '../components/List/List';
+
 
 const Main = () => {
 	return (
-		<>
-			<div>메인페이지입니다</div>
+		<div>
+			<Header />
 			<List />
-		</>
+		</div>
 	);
 };
 export default Main;
