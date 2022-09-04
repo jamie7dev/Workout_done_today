@@ -30,6 +30,7 @@ const List = () => {
     </StListContainer>
     </>
   );
+
 };
 
 export default List;

@@ -6,6 +6,7 @@ const post = () => {
     	<div>
 				<Post />
 			</div>
+
     );
 };
 export default post;

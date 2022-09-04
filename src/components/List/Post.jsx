@@ -53,6 +53,7 @@ const Post = () => {
     </StPostContainer>
     </>
   );
+
 };
 
 export default Post;

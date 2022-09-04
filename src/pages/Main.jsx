@@ -10,5 +10,6 @@ const Main = () => {
 				<List />
 			</div>
     );
+
 };
 export default Main;

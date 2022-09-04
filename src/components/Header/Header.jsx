@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
     return (
+
       <>
         <StNavigation>
           <StLink to="/login"><span>로그인(임시)</span></StLink>
@@ -13,6 +14,7 @@ const Header = () => {
             <StTitle>✊ 오늘 운동 완료 했니? ✊</StTitle>
         </HeaderStyle>
       </>
+
     );
 };
 
@@ -21,7 +23,7 @@ const HeaderStyle = styled.header`
   color: #4B89DC;
   height: 10vh;
   padding: 20px;
-  
+ 
 `;
 
 const StNavigation = styled.nav`
@@ -47,8 +49,7 @@ const StLink = styled(Link)`
 const StTitle = styled.div`
   margin: 0 auto;
   font-size: 60px;
-  font-weight: bold;
-
+  font-weight: bold;  
 `;
 
 export default Header;
