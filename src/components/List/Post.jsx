@@ -77,7 +77,8 @@ const StPostHeader = styled.div`
   line-height: 100px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-   
+  /* font-family: 'Do Hyeon', sans-serif; */
+  font-size: 30px;
 `;
 
 const StPostBox = styled.div`
@@ -94,7 +95,7 @@ const StPostBox = styled.div`
 `;
 
 const StImage = styled.div`
-  background-color: yellow;
+  background-color: white;
   width: 50%;
   display: inline-block;
 `;
