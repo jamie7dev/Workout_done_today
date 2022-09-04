@@ -24,7 +24,7 @@ const Form = () => {
     };
 
     const inputHandler = (e) => {
-        const { name, value } = e.targer;
+        const { name, value } = e.target;
         setInput({ ...input, [name]: value });
     };
 
@@ -45,7 +45,7 @@ const Form = () => {
                         name="username"
                         id="username"
                         value={input.username} />
-                    {/* <StButton>중복확인</StButton> */}
+                    <StButton>중복확인</StButton>
                 </InputWrap>
                 <StSmallLabel>* 아이디는 영어와 숫자로 6자이상 8자 이하로 입력해주세요. *</StSmallLabel>
 
@@ -53,9 +53,9 @@ const Form = () => {
                     <StLabel >비밀번호</StLabel>
                     <StInput placeholder="비밀번호를 입력하세요."
                         onChange={inputHandler}
-                        type="passWord"
-                        name="passWord"
-                        id="passWord"
+                        type="password"
+                        name="password"
+                        id="password"
                         value={input.password} />
                 </InputWrap>
                 <StSmallLabel style={{ marginLeft: "50px" }}>* 비밀번호는 영어, 숫자와 특수문자포함 8자이상 20자이하로 입력해주세요 *</StSmallLabel>
@@ -64,7 +64,7 @@ const Form = () => {
                     <StInput placeholder="비밀번호를 재입력하세요."
                         onChange={inputHandler}
                         type="password"
-                        name="passWordConfirm"
+                        name="passwordConfirm"
                         id="passWordConfirm"
                         value={input.passwordConfirm} />
                 </InputWrap>
