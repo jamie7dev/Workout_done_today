@@ -3,33 +3,34 @@ import styled from "styled-components";
 
 const List = () => {
 
-    return (
-        <>
-            <StListContainer>
-                <StListCard>
-                    <StListImage>이미지</StListImage>
-                    <p>(조회수)</p>
-                    <StListTitle>제목</StListTitle>
-                    <StUser>username</StUser>
-                    <StTime>날짜</StTime>
-                </StListCard>
-                <StListCard>
-                    <StListImage>이미지</StListImage>
-                    <p>(조회수)</p>
-                    <StListTitle>제목</StListTitle>
-                    <StUser>username</StUser>
-                    <StTime>날짜</StTime>
-                </StListCard>
-                <StListCard>
-                    <StListImage>이미지</StListImage>
-                    <p>(조회수)</p>
-                    <StListTitle>제목</StListTitle>
-                    <StUser>username</StUser>
-                    <StTime>날짜</StTime>
-                </StListCard>
-            </StListContainer>
-        </>
-    );
+  return (
+    <>
+    <StListContainer>
+      <StListCard>
+        <StListImage>이미지</StListImage>
+        <p>(조회수)</p>
+        <StListTitle>제목</StListTitle>
+        <StUser>username</StUser>
+        <StTime>날짜</StTime>
+      </StListCard>    
+      <StListCard>
+        <StListImage>이미지</StListImage>
+        <p>(조회수)</p>
+        <StListTitle>제목</StListTitle>
+        <StUser>username</StUser>
+        <StTime>날짜</StTime>
+      </StListCard>    
+      <StListCard>
+        <StListImage>이미지</StListImage>
+        <p>(조회수)</p>
+        <StListTitle>제목</StListTitle>
+        <StUser>username</StUser>
+        <StTime>날짜</StTime>
+      </StListCard>      
+    </StListContainer>
+    </>
+  );
+
 };
 
 export default List;

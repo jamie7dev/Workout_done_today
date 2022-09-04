@@ -3,56 +3,57 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 const Post = () => {
-    const [imageSrc, setImageSrc] = useState("");
+  const [imageSrc, setImageSrc] = useState("");
 
-    const imageUpload = (fileBlob) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(fileBlob);
-        return new Promise((resolve) => {
-            reader.onload = () => {
-                setImageSrc(reader.result);
-                resolve();
-            };
-        });
-    };
+  const imageUpload = (fileBlob) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(fileBlob);
+     return new Promise((resolve) => {
+      reader.onload = () => {
+        setImageSrc(reader.result);
+        resolve();
+      };
+    });
+  };
 
-    return (
-        <>
-            <Link to="/"><span>home</span></Link>
-            <StPostContainer>
-                <StPostHeader>
-                    <h1>오운완 인증해주세요</h1>
-                </StPostHeader>
-                <StPostBox>
-                    <StImage>
-                        <p>이미지를 업로드해주세요</p>
-                        <input
-                            type="file"
-                            accept="image/*"
-                            onChange={(e) => {
-                                imageUpload(e.target.files[0])
-                            }}
-                        />
-                        <div className="preview">
-                            {imageSrc && (
-                                <img
-                                    src={imageSrc}
-                                    alt="preview-img"
-                                    width="280px"
-                                    height="350px"
-                                />
-                            )}
-                        </div>
-                    </StImage>
-                    <StPostContent>
-                        <div>타이틀</div>
-                        <div>내용</div>
-                        <button>인증하기</button>
-                    </StPostContent>
-                </StPostBox>
-            </StPostContainer>
-        </>
-    );
+  return (
+    <>
+    <Link to="/"><span>home</span></Link>
+    <StPostContainer>
+    <StPostHeader>
+    <h1>오운완 인증해주세요</h1>
+    </StPostHeader>
+    <StPostBox>
+      <StImage>
+      <p>이미지를 업로드해주세요</p>
+      <input
+          type="file"
+          accept="image/*"
+          onChange={(e) => {
+            imageUpload(e.target.files[0])
+          }}
+        />
+        <div className="preview">
+          {imageSrc && (
+            <img
+              src={imageSrc}
+              alt="preview-img"
+              width="280px"
+              height="350px"
+            />
+          )}
+        </div>
+      </StImage>
+      <StPostContent>
+        <div>타이틀</div>
+        <div>내용</div>
+        <button>인증하기</button>
+      </StPostContent>
+    </StPostBox>
+    </StPostContainer>
+    </>
+  );
+
 };
 
 export default Post;

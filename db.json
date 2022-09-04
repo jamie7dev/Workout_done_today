@@ -1,4 +1,12 @@
 {
+  "userinfo": [
+    {
+      "username": "chaewon",
+      "password": "chaewon",
+      "loggedIn": true,
+      "id": 1
+      }
+      ],
   "data": [
     {
       "id": 1662199724562,
@@ -16,4 +24,4 @@
       "password": ""
     }
   ]
-}
+  }
