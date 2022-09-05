@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import axios from "axios";
-import { __getUsername } from "../../redux/modules/signUp";
+// import axios from "axios";
+import { __signUP } from "../../redux/modules/signUp";
 
 
 const Form = () => {
     const dispatch = useDispatch();
-    const timestamp = new Date().getTime();
+    // const timestamp = new Date().getTime();
 
     const [input, setInput] = useState({
         username: "",
@@ -60,22 +60,22 @@ const Form = () => {
     }
 
 
-    
     //회원가입 버튼 누르면 실행
     const addHandler = () => {
-        const { username, password } = input;
+        const { username, password, passwordConfirm } = input;
         const user = {
-            id: +timestamp,
             username: username,
-            password: password
+            password: password,
+            passwordConfirm: passwordConfirm
         };
-        axios.post("http://localhost:3001/data", user);
+        dispatch(__signUP(user));
+        // axios.post("http://15.164.212.207:8080/api/memeber/signup", user);
         if(validation()) return;
     };
     
-    useEffect(() => {
-        dispatch(__getUsername());
-      }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(__signUP());
+    //   }, [dispatch]);
     
 
 

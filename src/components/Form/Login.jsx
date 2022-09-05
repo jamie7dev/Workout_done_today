@@ -84,9 +84,12 @@ const Login = () => {
               onChange={onChangeHandler}
               />
             </div>
-            <StLoginBtn>로그인</StLoginBtn>
-            <StLoginBtn onClick={()=>{navigate(`/form`)}}>회원가입</StLoginBtn>
           </StLoginInputBox>
+          <div>
+            <StLoginBtn type="button">로그인</StLoginBtn>
+            <StLoginBtn onClick={()=>{navigate(`/form`)}}>회원가입</StLoginBtn>
+          </div>
+          
           </StLoginBox>
         </StLoginContainer>   
       </form>   
@@ -135,22 +138,21 @@ const StLoginInputBox = styled.div`
 margin-top: 20px;
 `;
 
-const StLoginInput = styled.div`
-  font-size: 18px;
-  padding: 10px;
-  margin: 10px;
+const StLoginInput = styled.input`
+  font-size: 16px;
+  padding: 4px;
+  margin: 20px;
+  width: 180px;
   background: white;
   border: 1px solid #4B89DC;
   border-radius: 3px;
-  /* width: 200px; */
 `;
 
 const StLoginBtn = styled.div`
   background-color: white;
   border: 1px solid #4B89DC;
-  outline: none;
   display: inline-block;
-  margin: 30px 30px;
+  margin: 40px 38px;
   border-radius: 4px;
   color: #4B89DC;
   font-weight: bold;
