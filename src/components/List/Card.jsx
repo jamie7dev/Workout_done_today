@@ -30,11 +30,11 @@ const Card = forwardRef((props, ref) => {
                     )}
 
                     <p style={{ color: "black" }}>
-                        {props.post.title}
+                        작성자 : {props.post.title}
                     </p>
 
                     <p style={{ color: "black" }}>
-                        {props.post.body}
+                        내용 : {props.post.body}
                     </p>
                     <p style={{ color: "black" }}>조회수 : </p>
 
