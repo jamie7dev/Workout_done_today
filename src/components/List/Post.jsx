@@ -22,38 +22,15 @@ const Post = () => {
         imageInput.current.click();
     };
 
-    //이미지 파일 데이터로 보내기위해
-    const imageAdd = async () => {
-        const formData = new FormData()
-
-        formData.append("file", files[0])
-
-        const value = [{
-            title: "hello",
-            contente: "wolrd"
-        }]
-
-        const blob = new Blob([JSON.stringify(value)], { type: "application/json" })
-
-        formData.append("data", blob) // 또는  formData.append("data", JSON.stringify(value)); // JSON 형식으로 파싱.(백엔드의 요청에 따라 전송방식이 달라진다.)
-        await axios({
-            method: "POST",
-            url: `http://xxxxxx.com/api/xx`,
-            mode: "cors",
-            headers: {
-                "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.
-            },
-            data: formData, // data 전송시에 반드시 생성되어 있는 formData 객체만 전송 하여야 한다.
-        })
-    }
-
+    // //formData 보내보기 
+    // var formData = new FormData();
+    // formData.append('file', document.getElementById('file input').files[0]);
 
     // 게시글 데이터를 보내기위해
-
     const [input, setInput] = useState({
         title: "",
         body: "",
-        image: ""
+        imageSrc: ""
     });
 
     const addHandler = () => {
@@ -61,9 +38,9 @@ const Post = () => {
         const annoyance = {
             title: title,
             body: body,
-            // imagefile: ""
+            imageSrc: imageSrc
         };
-        axios.post("http://localhost:3001/post", annoyance);
+        axios.post("http://localhost:3001/posts", annoyance);
     };
 
     const inputHandler = (e) => {
@@ -97,8 +74,8 @@ const Post = () => {
                             <img
                                 src={imageSrc}
                                 alt="preview-img"
-                                width="280px"
-                                height="350px"
+                                width="30%"
+                                height="45%"
                             />
                         )}
                     </div>

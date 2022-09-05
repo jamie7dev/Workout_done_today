@@ -1,33 +1,24 @@
 import React from "react";
 import styled from "styled-components";
+import Card from "./Card";
+import useFetchPost from "./useFetchPost";
 
 const List = () => {
-
+    const posts = useFetchPost(null);
     return (
         <>
-            <StListContainer>
-                <StListCard>
-                    <StListImage>이미지</StListImage>
-                    <p>(조회수)</p>
-                    <StListTitle>제목</StListTitle>
-                    <StUser>username</StUser>
-                    <StTime>날짜</StTime>
-                </StListCard>
-                <StListCard>
-                    <StListImage>이미지</StListImage>
-                    <p>(조회수)</p>
-                    <StListTitle>제목</StListTitle>
-                    <StUser>username</StUser>
-                    <StTime>날짜</StTime>
-                </StListCard>
-                <StListCard>
-                    <StListImage>이미지</StListImage>
-                    <p>(조회수)</p>
-                    <StListTitle>제목</StListTitle>
-                    <StUser>username</StUser>
-                    <StTime>날짜</StTime>
-                </StListCard>
-            </StListContainer>
+            <div>
+                <PostTitle>물론이지, 너도 ?</PostTitle>
+                <StListContainer>
+                    <StCard>
+                        {posts?.map((post) => {
+                            // kry=1 post=json{}
+                            return <Card key={post.id} post={post} />
+                        })}
+                    </StCard>
+                </StListContainer>
+            </div>
+
         </>
     );
 };
@@ -35,45 +26,26 @@ const List = () => {
 export default List;
 
 const StListContainer = styled.div`
-  
   background-color: whitesmoke;
-  width: 1200px;
-  height: 1200px;
-  margin: 50px auto;
+  width: 100%;
+  height: 100%;
+  margin: auto;
   display: flex;
-  justify-content: space-evenly;
 `;
 
-const StListCard = styled.div`
-  background-color: white;
-  border: 1px solid #4B89DC;
-  width: 300px;
-  height: 400px;
-  margin-top: 100px;
-  p {
-    margin: 10px 40px;
-  }
+const StCard = styled.div`
+  display: flex;
+  margin: auto;
+  padding: 20px;
 `;
 
-const StListImage = styled.div`
-  border: 1px solid #4B89DC;
-  width: 220px;
-  height: 200px;
-  margin: 40px 40px 0 40px;
-  padding-top: 10px;
-`;
-
-const StListTitle = styled.div`
-  border: 1px solid #4B89DC;
-  margin: 0 40px 10px 40px;
-`;
-
-const StUser = styled.div`
-  border: 1px solid #4B89DC;
-  margin: 0 40px 10px 40px;
-`;
-
-const StTime = styled.div`
-  border: 1px solid #4B89DC;
-  margin: 0 40px;
+const PostTitle = styled.div`
+  margin  : auto;
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+  height: 60px;
+  background-color: whitesmoke;
+  width: 100%
 `;
