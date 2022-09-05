@@ -65,9 +65,10 @@ const Login = () => {
           <StLoginHeader>
             <h1> 오늘 운동 완료했니? </h1>
           </StLoginHeader>
+          <StLoginInputBox>
             <div className="username-box">
-              <label htmlFor="username">ID</label>
-              <input 
+              <label htmlFor="username">username</label>
+              <StLoginInput 
               type="text"
               name="username"
               value={inputValue.username}
@@ -75,18 +76,17 @@ const Login = () => {
               />
             </div>
             <div className="password-box">
-              <label htmlFor="password">PW</label>
-              <input 
+              <label htmlFor="password">password</label>
+              <StLoginInput 
               type="password"
               name="password"
               value={inputValue.password}
               onChange={onChangeHandler}
               />
             </div>
-            <div className="btns">
-              <button>로그인</button>
-              <button onClick={()=>{navigate(`/form`)}}>회원가입</button>
-            </div> 
+            <StLoginBtn>로그인</StLoginBtn>
+            <StLoginBtn onClick={()=>{navigate(`/form`)}}>회원가입</StLoginBtn>
+          </StLoginInputBox>
           </StLoginBox>
         </StLoginContainer>   
       </form>   
@@ -112,9 +112,10 @@ const StLoginBox = styled.div`
   align-items: center;
   text-align: center;
   flex-direction: column;
-  border: 1px solid gray;
-  color: gray;
+  border: 1px solid #4B89DC;
+  color: #4B89DC;
   border-radius: 10px;
+  line-height: 40px;
 `;
 
 const StLoginHeader = styled.div`
@@ -129,3 +130,51 @@ const StLoginHeader = styled.div`
     line-height: 50px;
   }
 `;
+
+const StLoginInputBox = styled.div`
+margin-top: 20px;
+`;
+
+const StLoginInput = styled.div`
+  font-size: 18px;
+  padding: 10px;
+  margin: 10px;
+  background: white;
+  border: 1px solid #4B89DC;
+  border-radius: 3px;
+  /* width: 200px; */
+`;
+
+const StLoginBtn = styled.div`
+  background-color: white;
+  border: 1px solid #4B89DC;
+  outline: none;
+  display: inline-block;
+  margin: 30px 30px;
+  border-radius: 4px;
+  color: #4B89DC;
+  font-weight: bold;
+  cursor: pointer;
+  padding-left: 1rem;
+  padding-right: 1rem; 
+  &:hover{  
+    background-color : #4B89DC;
+    color : white;
+  }
+`;
+
+// const StSignupBtn = styled.div`
+//   background-color: #4B89DC;
+//   outline: none;
+//   display: inline-block;
+//   margin: 44px 30px;
+//   outline: none;
+//   border: none;
+//   border-radius: 4px;
+//   color: white;
+//   font-weight: bold;
+//   cursor: pointer;
+//   padding-left: 1rem;
+//   padding-right: 1rem; 
+  
+// `;

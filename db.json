@@ -1,27 +1,11 @@
 {
-  "userinfo": [
-    {
-      "username": "chaewon",
-      "password": "chaewon",
-      "loggedIn": true,
-      "id": 1
-      }
-      ],
+  "userinfo": [],
   "data": [
     {
-      "id": 1662199724562,
-      "username": "",
-      "password": ""
+      "id": 1
     },
     {
-      "id": 1662199762254,
-      "username": "qwe",
-      "password": "qwe"
-    },
-    {
-      "id": 1662202293289,
-      "username": "",
-      "password": ""
+      "id": 2
     }
   ]
-  }
+}
