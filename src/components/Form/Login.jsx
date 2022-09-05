@@ -40,6 +40,7 @@ const Login = () => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
+    console.log("ddd");
     if (inputValue.username.trim() === "") return alert("아이디를 입력해주세요!");
     if (inputValue.password.trim() === "") return alert("패스워드를 입력해주세요!");
 
@@ -60,7 +61,7 @@ const Login = () => {
     <>
     <form onSubmit={onSubmitHandler}>
       <StLoginContainer>
-        <Link to="/"><span>home</span></Link>
+        <Link to="/main"><span>home</span></Link>
         <StLoginBox>
           <StLoginHeader>
             <h1> 오늘 운동 완료했니? </h1>
@@ -86,7 +87,7 @@ const Login = () => {
             </div>
           </StLoginInputBox>
           <div>
-            <StLoginBtn type="button">로그인</StLoginBtn>
+            <StLoginBtn>로그인</StLoginBtn>
             <StLoginBtn onClick={()=>{navigate(`/form`)}}>회원가입</StLoginBtn>
           </div>
           

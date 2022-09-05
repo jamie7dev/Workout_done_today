@@ -6,7 +6,7 @@ const Header = () => {
 
       <>
         <StNavigation>
-          <StLink to="/login"><span>로그인(임시)</span></StLink>
+          <StLink to="/"><span>로그인(임시)</span></StLink>
           <StLink to="/post"><span>게시글 작성하기</span></StLink>
           <button>로그아웃</button>
         </StNavigation>        
