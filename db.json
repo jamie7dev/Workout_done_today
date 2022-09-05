@@ -15,5 +15,28 @@
       "username": "",
       "password": ""
     }
+  ],
+  "post": [
+    {
+      "title": "qwe",
+      "body": "qwe",
+      "id": 1
+    },
+    {
+      "title": "qwe",
+      "body": "qwe",
+      "id": 2
+    },
+    {
+      "title": "qwe",
+      "body": "qwe",
+      "id": 3
+    },
+    {
+      "title": "ㅂㅈㄷ",
+      "body": "ㅂㅈㄷ",
+      "imagefile": "",
+      "id": 4
+    }
   ]
 }
