@@ -152,8 +152,10 @@ const StLoginInput = styled.input`
 const StLoginBtn = styled.button`
   background-color: white;
   border: 1px solid #4B89DC;
+  width: 100px;
+  height: 38px;
   display: inline-block;
-  margin: 40px 38px;
+  margin: 40px 30px;
   border-radius: 4px;
   color: #4B89DC;
   font-weight: bold;
