@@ -1,34 +1,82 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import axios from "axios";
-
+// import axios from "axios";
+import { __signUP } from "../../redux/modules/signUp";
 
 
 const Form = () => {
+    const dispatch = useDispatch();
+    // const timestamp = new Date().getTime();
+
     const [input, setInput] = useState({
         username: "",
         password: "",
         passwordConfirm: ""
     });
 
-    const timestamp = new Date().getTime();
+    const [usernameError, setUsernameError] = useState(false);
+    const [passwordError, setPasswordError] = useState(false);
+    const [passwordConfirmError, setPasswordConfirmError] = useState(false);
+   
 
-    const addHandler = () => {
-        const { username, password } = input;
-        const annoyance = {
-            id: +timestamp,
-            username: username,
-            password: password
-        };
-        axios.post("http://localhost:3001/data", annoyance);
+//유효성 체크    
+    const onChangeUsername = (e) => {
+        const userIdRegex = /^[A-Za-z0-9+]{5,}$/;
+        if ((!e.target.value || (userIdRegex.test(e.target.value)))) setUsernameError(false);
+        else setUsernameError(true);
+        // setInput(e.target.value);
+        const { name, value } = e.target;
+        setInput({ ...input, [name]: value });
     };
+    const onChangePassword = (e) => {
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
-    const inputHandler = (e) => {
+        if ((!e.target.value || (passwordRegex.test(e.target.value)))) setPasswordError(false);
+        else setPasswordError(true);
+
+        if (!input.passwordConfirm || e.target.value === input.passwordConfirm) setPasswordConfirmError(false);
+        else setPasswordConfirmError(true);
+        // setInput(e.target.value);
+        const { name, value } = e.target;
+        setInput({ ...input, [name]: value });
+    };
+    const onChangePasswordConfirm = (e) => {
+        if (input.password === e.target.value) setPasswordConfirmError(false);
+        else setPasswordConfirmError(true);
+        // setPasswordConfirmError(e.target.value);
         const { name, value } = e.target;
         setInput({ ...input, [name]: value });
     };
 
+    //유효성 검사
+    const validation = () => {
+        if(!input.username) setUsernameError(true);
+        if(!input.password) setPasswordError(true);
+        if(!input.passwordConfirm) setPasswordConfirmError(true);
 
+        if(input.username && input.password && input.passwordConfirm) return true;
+        else return false;
+    }
+
+
+    //회원가입 버튼 누르면 실행
+    const addHandler = () => {
+        const { username, password, passwordConfirm } = input;
+        const user = {
+            username: username,
+            password: password,
+            passwordConfirm: passwordConfirm
+        };
+        dispatch(__signUP(user));
+        // axios.post("http://15.164.212.207:8080/api/memeber/signup", user);
+        if(validation()) return;
+    };
+    
+    // useEffect(() => {
+    //     dispatch(__signUP());
+    //   }, [dispatch]);
+    
 
 
     return (
@@ -39,34 +87,40 @@ const Form = () => {
             <StForm>
                 <InputWrap >
                     <StLabel>아이디</StLabel>
-                    <StInputId placeholder="아이디를 입력하세요."
-                        onChange={inputHandler}
+                    <StInputId placeholder="username를 입력하세요."
+                        onChange={onChangeUsername}
                         type="text"
                         name="username"
                         id="username"
                         value={input.username} />
+                        {usernameError && 
+                        <div className="invalid-input">* 아이디는 영어와 숫자로 4자이상 8자 이하로 입력해주세요. *</div>}
                     <StButton>중복확인</StButton>
                 </InputWrap>
-                <StSmallLabel>* 아이디는 영어와 숫자로 6자이상 8자 이하로 입력해주세요. *</StSmallLabel>
+                <StSmallLabel>* 아이디는 영어와 숫자로 4자이상 8자 이하로 입력해주세요. *</StSmallLabel>
 
                 <InputWrap >
                     <StLabel >비밀번호</StLabel>
-                    <StInput placeholder="비밀번호를 입력하세요."
-                        onChange={inputHandler}
+                    <StInput placeholder="password를 입력하세요."
+                        onChange={onChangePassword}
                         type="password"
                         name="password"
                         id="password"
                         value={input.password} />
+                        {passwordError && 
+                        <div className="invalid-input">* 비밀번호는 영어, 숫자 포함 8자이상 20자이하로 입력해주세요 * </div>}
                 </InputWrap>
-                <StSmallLabel style={{ marginLeft: "50px" }}>* 비밀번호는 영어, 숫자와 특수문자포함 8자이상 20자이하로 입력해주세요 *</StSmallLabel>
+                <StSmallLabel style={{ marginLeft: "50px" }}>* 비밀번호는 영어, 숫자 포함 8자이상 20자이하로 입력해주세요 *</StSmallLabel>
                 <InputWrap >
                     <StLabel>비밀번호 재확인</StLabel>
-                    <StInput placeholder="비밀번호를 재입력하세요."
-                        onChange={inputHandler}
+                    <StInput placeholder="passwordConfirm."
+                        onChange={onChangePasswordConfirm}
                         type="password"
                         name="passwordConfirm"
                         id="passWordConfirm"
                         value={input.passwordConfirm} />
+                        {passwordConfirmError && 
+                        <div className="invalid-input">비밀번호가 일치하지 않습니다.</div>}
                 </InputWrap>
                 <JoinBtn type="button"
                     onClick={() => { addHandler(); console.log(input); }}>
@@ -78,6 +132,11 @@ const Form = () => {
 };
 
 export default Form;
+
+const ContainerWrap = styled.div`
+    text-align: center;
+    margin: auto;
+`;
 
 const StTitle = styled.div`
     padding: 25px;
@@ -92,11 +151,15 @@ const StTitle = styled.div`
     margin-right: auto;
 `;
 
-const ContainerWrap = styled.div`
-    text-align: center;
-    margin: auto;
+const InputWrap = styled.div`
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  margin: 1.5% auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
-
 
 const StLabel = styled.label`
   width: 10vw;
@@ -106,17 +169,18 @@ const StLabel = styled.label`
   padding: 2%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: right;
   border-radius: 8px;    
   font-weight: bolder;
 `;
 
 const StInputId = styled.input`
-  width: 30%;
+  width: 32%;
   padding: 12px;
   border: none;
   border-radius: 8px; 
-  height: 40px; 
+  height: 30px; 
+  background-color: whitesmoke;
 `;
 
 const StInput = styled.input`
@@ -124,23 +188,18 @@ const StInput = styled.input`
   padding: 12px;
   border: none;
   border-radius: 8px; 
-  height: 40px;
+  height: 30px;
+  background-color: whitesmoke;
 `;
 
-const InputWrap = styled.div`
-  width: 95%;
-  border: none;
-  border-radius: 8px;
-  margin: 1.5% auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+
 
 const StButton = styled.button`
   background-color: #4B89DC;
   border:none;
   border-radius: 5px;
+  padding: 5px;
+  margin: 0 0 0 38px;
 `;
 
 const StSmallLabel = styled.label`

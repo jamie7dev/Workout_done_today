@@ -1,13 +1,21 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
 
 
-export const __login = createAsyncThunk(
-  "data/login",
+const initialState = {
+  data: [],
+  isLoading: false,
+  error: null,
+  success: false,
+};
+
+
+export const __signUP = createAsyncThunk(
+  "data/signup",
   async (payload, thunkAPI) => {
       try {
           console.log(payload);
-          const data =  await axios.post("http://15.164.212.207:8080/api/login", payload);
+          const data =  await axios.post("http://15.164.212.207:8080/api/signup", payload);
           console.log(data);
           return thunkAPI.fulfillWithValue(data.data);
         } catch (error) {
@@ -16,36 +24,31 @@ export const __login = createAsyncThunk(
   }
 );
 
-export const userSlice = createSlice({
 
-  name:"user", 
-  initialState:{
-    user:null //user has not loged in
-  },
+export const signupSlice = createSlice({
+  name:"signup", 
+  initialState,
   reducers: {
-    login: (state, action) => {
+    addUser: (state, action) => {
       state.user = action.payload;
-      axios.post("http://15.164.212.207:8080/api/login", action.payload)
+      axios.post("http://15.164.212.207:8080/api/signup", action.payload)
     }
   },
 
   extraReducers: {
-    [__login.pending]: (state) => {
+    [__signUP.pending]: (state) => {
       state.isLoading = true; // 네트워크 요청이 시작되면 로딩상태를 true로 변경합니다.
     },
-    [__login.fulfilled]: (state, action) => {
+    [__signUP.fulfilled]: (state, action) => {
       state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
       state.data = action.payload; // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
     },
-    [__login.rejected]: (state, action) => {
+    [__signUP.rejected]: (state, action) => {
       state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경합니다.
       state.error = action.payload; // catch 된 error 객체를 state.error에 넣습니다.
     },
   },
-
 });
 
-
-
-export const { login } = userSlice.actions;
-export default userSlice.reducer;
+export const { addUser } = signupSlice.actions;
+export default signupSlice;
