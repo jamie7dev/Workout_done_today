@@ -3,9 +3,19 @@ import styled from "styled-components";
 import axios from "axios";
 
 const Post = () => {
+
     //preview file
     const [imageSrc, setImageSrc] = useState("");
+    const [formData] = useState(new FormData());
+    console.log("formData is", formData);
     const imageUpload = (fileBlob) => {
+        console.log("fileblob is", fileBlob);
+        formData.append('file', fileBlob);
+
+        for (var pair of formData.entries()) {
+            console.log(pair[0] + ', ' + pair[1]);
+        }
+
         const reader = new FileReader();
         reader.readAsDataURL(fileBlob);
         return new Promise((resolve) => {
@@ -23,8 +33,7 @@ const Post = () => {
     };
 
     // //formData 보내보기 
-    // var formData = new FormData();
-    // formData.append('file', document.getElementById('file input').files[0]);
+
 
     // 게시글 데이터를 보내기위해
     const [input, setInput] = useState({
@@ -35,12 +44,31 @@ const Post = () => {
 
     const addHandler = () => {
         const { title, body, } = input;
-        const annoyance = {
-            title: title,
-            body: body,
-            imageSrc: imageSrc
-        };
-        axios.post("http://localhost:3001/posts", annoyance);
+        formData.append('title', title);
+        formData.append('body', body);
+        console.log("formData is", formData);
+
+        for (var pair of formData.entries()) {
+            console.log(pair[0] + ', ' + pair[1]);
+        }
+
+        // const annoyance = {
+        //     title: title,
+        //     body: body,
+        //     imageSrc: imageSrc
+        // };
+        axios({
+            method: "POST",
+            url: "http://localhost:3001/posts",
+            mode: "cors",
+            headers: {
+                "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.
+            },
+            data: formData, // data 전송시에 반드시 생성되어 있는 formData 객체만 전송 하여야 한다.
+        })
+        window.location.href = '/main';
+
+
     };
 
     const inputHandler = (e) => {
@@ -68,14 +96,14 @@ const Post = () => {
                             imageUpload(e.target.files[0])
                         }}
                     />
-                    <button onClick={onClickImageUpload}>이미지업로드하기</button>
+                    <StButton onClick={onClickImageUpload}>이미지업로드하기🤳</StButton>
                     <div className="preview">
                         {imageSrc && (
                             <img
                                 src={imageSrc}
                                 alt="preview-img"
-                                width="30%"
-                                height="45%"
+                                width="50%"
+                                height="60%"
                             />
                         )}
                     </div>
@@ -84,7 +112,7 @@ const Post = () => {
                 <StPostContent>
                     <InputWrap>
                         <StLabel >제목</StLabel>
-                        <StInput placeholder="제목를 입력해주세요."
+                        <StTitleInput placeholder="제목를 입력해주세요."
                             onChange={inputHandler}
                             type="text"
                             name="title"
@@ -94,7 +122,7 @@ const Post = () => {
 
                     <InputWrap >
                         <StLabel>내용</StLabel>
-                        <StInput placeholder="내용을 입력해주세요."
+                        <StBodyInput placeholder="내용을 입력해주세요."
                             onChange={inputHandler}
                             type="text"
                             name="body"
@@ -104,7 +132,7 @@ const Post = () => {
 
                     <JoinBtn type="button"
                         onClick={() => { addHandler(); console.log(input); }}>
-                        득근완료...
+                        득근완료...🙆
                     </JoinBtn>
 
                 </StPostContent>
@@ -118,9 +146,9 @@ export default Post;
 
 const StPostContainer = styled.div`
 background-color: whitesmoke;
-width: 1000px;
-height: 580px;
-margin: 0 auto;
+width: 100%;
+max-height: 300vw;
+margin-top: 40px;
 color: #4B89DC;
 border-radius: 8px;
 `;
@@ -151,29 +179,71 @@ const StForm = styled.div`
 `;
 
 const StImage = styled.div`
-  background-color: yellow;
-  width: 50%;
+  background-color: #d6ecf3;
+  border-radius: 15px;
+  width: 40vw;
+  max-height: 30vw;
   display: inline-block;
+  padding-bottom: 35px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+`;
+
+const StButton = styled.button`
+  border: none;
+  font-size: 20px;
+  border-radius: 10px;
+  margin-top: 30px;
+  :hover{
+  font-weight: 800 ;
+  background-color: #ffa2a2;
+  }
 `;
 
 const StPostContent = styled.div`
   background-color: white;
-  width: 50%;
+  width: 60vw;
+  border-radius : 15px;
   display: inline-block;
+  margin-bottom: 20px;
 `;
 
-const StInput = styled.input`
-  background-color: red;
+const StTitleInput = styled.input`
+  margin-top: 20px;
+
+  width: 60%;
+  padding: 15px 2%;
+  font-size: 15px;
+  border-radius: 8px;
+`;
+
+const StBodyInput = styled.input`
+  margin-bottom: 20px;
+  margin-top:10px;
+  width: 60%;
+  padding: 15px 2%;
+  font-size: 15px;
+  border-radius: 8px;
 `;
 
 const InputWrap = styled.div`
-    
+    border-radius: 15px;
 `;
 
 const StLabel = styled.label`
-    
+  font-size : 15px;
+  font-weight: 600;
+  margin-right: 20px;
 `;
 
 const JoinBtn = styled.button`
-    
+  background-color: #dfdddd;
+  border: none;
+  border-radius: 15px;
+  font-size: 18px;
+  padding: 1.5%;
+  margin-bottom: 20px;
+  :hover{
+    background-color: #c1c1f9;
+  }
 `;
