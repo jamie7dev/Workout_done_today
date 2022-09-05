@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { login } from "../../redux/modules/userSlice";
+import { login, __login } from "../../redux/modules/userSlice";
 
 
 const Login = () => {
@@ -20,16 +20,16 @@ const Login = () => {
   const [inputValue, setInputValue] = useState(initialState);
 
 
-  const fetchLogin = async () => {
-    const { data } = await axios.get("http://localhost:3001/userinfo");
-     // 서버로부터 fetching한 데이터를 useState의 state로 set 합니다.
-  };
+  // const fetchLogin = async () => {
+  //   const { data } = await axios.get("http://localhost:3001/userinfo");
+  //    // 서버로부터 fetching한 데이터를 useState의 state로 set 합니다.
+  // };
 
 
-  useEffect(() => {
-		// effect 구문에 생성한 함수를 넣어 실행합니다.
-    fetchLogin();
-  }, []);
+  // useEffect(() => {
+	// 	// effect 구문에 생성한 함수를 넣어 실행합니다.
+  //   fetchLogin();
+  // }, []);
 
   
 
@@ -44,7 +44,7 @@ const Login = () => {
     if (inputValue.username.trim() === "") return alert("아이디를 입력해주세요!");
     if (inputValue.password.trim() === "") return alert("패스워드를 입력해주세요!");
 
-    dispatch(login({...inputValue,
+    dispatch(__login({...inputValue,
       username: inputValue.username,
       password: inputValue.password,
       loggedIn: true
@@ -149,7 +149,7 @@ const StLoginInput = styled.input`
   border-radius: 3px;
 `;
 
-const StLoginBtn = styled.div`
+const StLoginBtn = styled.button`
   background-color: white;
   border: 1px solid #4B89DC;
   display: inline-block;
