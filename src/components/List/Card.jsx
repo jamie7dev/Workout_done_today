@@ -1,0 +1,69 @@
+import React, { forwardRef } from "react";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+
+
+const Card = forwardRef((props, ref) => {
+    const navigate = useNavigate();
+    // key=1 post=json{}, props에 들어가잇음
+
+    return (
+        <div>
+            <StContainer>
+                <StBox ref={ref} onClick={() => {
+                    navigate(`/detail/${props.post.id}`);
+                }}>
+
+                    {props.post.imageSrc && (
+                        <img
+                            src={props.post.imageSrc}
+                            alt="preview-img"
+                            width="70%"
+                            height="60%"
+                            style={{
+                                border: "2px solid white",
+                                borderRadius: "10px",
+                                backgroundColor: "whitesmoke",
+                                padding: "20px"
+                            }}
+                        />
+                    )}
+
+                    <p style={{ color: "black" }}>
+                        작성자 : {props.post.title}
+                    </p>
+
+                    <p style={{ color: "black" }}>
+                        내용 : {props.post.body}
+                    </p>
+                    <p style={{ color: "black" }}>조회수 : </p>
+
+
+                </StBox>
+            </StContainer>
+        </div >
+    );
+});
+
+export default Card;
+
+
+
+const StContainer = styled.div`
+    padding: 10px;
+    display: flex;
+`;
+
+const StBox = styled.div`
+    margin: auto;
+    margin-left: 50px;
+    background-color: #8adafd;
+    border-radius: 10px;
+    padding : 5px;
+    width: 300px;
+    height:400px;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+`;
