@@ -45,7 +45,9 @@ const StListContainer = styled.div`
 const StCard = styled.div`
   margin: auto;
   padding: 20px;
-  display: inline-flexbox;
+  width:80%;
+  display: flex;
+  flex-wrap: wrap;
 `;
 
 const PostTitle = styled.div`
