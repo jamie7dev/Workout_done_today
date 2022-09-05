@@ -1,80 +1,80 @@
 import React from "react";
 import styled from "styled-components";
+import Card from "./Card";
+import useFetchPost from "./useFetchPost";
+import { useNavigate } from "react-router-dom";
 
 const List = () => {
-
+  const posts = useFetchPost(null);
+  const navigate = useNavigate();
   return (
     <>
-    <StListContainer>
-      <StListCard>
-        <StListImage>이미지</StListImage>
-        <p>(조회수)</p>
-        <StListTitle>제목</StListTitle>
-        <StUser>username</StUser>
-        <StTime>날짜</StTime>
-      </StListCard>    
-      <StListCard>
-        <StListImage>이미지</StListImage>
-        <p>(조회수)</p>
-        <StListTitle>제목</StListTitle>
-        <StUser>username</StUser>
-        <StTime>날짜</StTime>
-      </StListCard>    
-      <StListCard>
-        <StListImage>이미지</StListImage>
-        <p>(조회수)</p>
-        <StListTitle>제목</StListTitle>
-        <StUser>username</StUser>
-        <StTime>날짜</StTime>
-      </StListCard>      
-    </StListContainer>
+      <div>
+        <PostTitle >
+          물론이지, 너도 ?
+          <StButton onClick={() => {
+            navigate(`/post`);
+          }}>
+            👉인증가실?👈
+          </StButton>
+        </PostTitle>
+        <StListContainer>
+          <StCard>
+            {posts?.map((post) => {
+              // kry=1 post=json{}
+              return <Card key={post.id} post={post} />
+            })}
+          </StCard>
+        </StListContainer>
+      </div>
+
     </>
   );
-
 };
 
 export default List;
 
 const StListContainer = styled.div`
-  
   background-color: whitesmoke;
-  width: 1200px;
-  height: 1200px;
-  margin: 50px auto;
+  width: 100vw;
+  height: 100%;
+  margin: auto;
+
+`;
+
+const StCard = styled.div`
+  margin: auto;
+  padding: 20px;
+  width:80%;
   display: flex;
-  justify-content: space-evenly;
+  flex-wrap: wrap;
 `;
 
-const StListCard = styled.div`
-  background-color: white;
-  border: 1px solid #4B89DC;
-  width: 300px;
-  height: 400px;
-  margin-top: 100px;
-  p {
-    margin: 10px 40px;
+const PostTitle = styled.div`
+  margin  : auto;
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+  height: 60px;
+  background-color: whitesmoke;
+  width: 100%
+`;
+
+const StButton = styled.button`
+  margin-left:60px ;
+  font-size: 30px;
+  font-weight: 600;
+  border-radius: 10px;
+  background-color: whitesmoke;
+  border: none;
+  text-decoration: underline;
+  :hover{
+    background-color: #f2f294;
+    border: 4px solid #4B89DC;
+    text-decoration: none;
   }
-`;
-
-const StListImage = styled.div`
-  border: 1px solid #4B89DC;
-  width: 220px;
-  height: 200px;
-  margin: 40px 40px 0 40px;
-  padding-top: 10px;
-`;
-
-const StListTitle = styled.div`
-  border: 1px solid #4B89DC;
-  margin: 0 40px 10px 40px;
-`;
-
-const StUser = styled.div`
-  border: 1px solid #4B89DC;
-  margin: 0 40px 10px 40px;
-`;
-
-const StTime = styled.div`
-  border: 1px solid #4B89DC;
-  margin: 0 40px;
+  :touch-action{
+    font-size: 15px;
+  }
 `;

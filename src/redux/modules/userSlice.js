@@ -17,6 +17,7 @@ export const __login = createAsyncThunk(
 );
 
 export const userSlice = createSlice({
+
   name:"user", 
   initialState:{
     user:null //user has not loged in
@@ -41,6 +42,7 @@ export const userSlice = createSlice({
       state.error = action.payload; // catch 된 error 객체를 state.error에 넣습니다.
     },
   },
+
 });
 
 
