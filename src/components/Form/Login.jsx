@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { __login } from "../../redux/modules/userSlice";
+import axios from "axios";
 
 
 const Login = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   
 
   const initialState = {
@@ -37,20 +38,40 @@ const Login = () => {
     setInputValue({ ...inputValue, [name]: value })
   };
 
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async(e) => {
     e.preventDefault();
-    console.log("ddd");
-    if (inputValue.username.trim() === "") return alert("아이디를 입력해주세요!");
-    if (inputValue.password.trim() === "") return alert("패스워드를 입력해주세요!");
+    //빈값 체크
+    if (inputValue.username === "" || inputValue.password === "") {
+      window.alert("아이디와 비밀번호를 입력해주세요.");
+    }
 
-    dispatch(__login({...inputValue,
-      username: inputValue.username,
-      password: inputValue.password,
-      loggedIn: true
-    }));
-    setInputValue(initialState);
+    // dispatch(__login({...inputValue,
+    //   username: inputValue.username,
+    //   password: inputValue.password,
+    //   loggedIn: true
+    // }));
+    // setInputValue(initialState);
 
+    try {
+      // console.log(payload);
+      const data =  await axios.post("http://15.164.212.207:8080/api/member/login", inputValue);
+      localStorage.setItem("token1", data.headers.authorization)    //accesstoken
+      localStorage.setItem("token2", data.headers.refreshtoken)   //refreshtoken 
+      localStorage.setItem("username",data.data.data.username)
+      console.log(data);
+      navigate('/main');
+      // if(data.data.success===false)
+      //     alert("data.data.error.message");
+          // alert("아이디와 비밀번호를 다시 확인해주세요.");
+          // else alert("로그인 성공");
+      // return thunkAPI.fulfillWithValue(data.data);
+    } catch (error) {
+      alert("아이디와 비밀번호를 다시 확인해주세요.");
+      // return thunkAPI.rejectWithValue(error);
+    }
+    
     console.log(inputValue);
+    
   };
   
 
@@ -152,8 +173,10 @@ const StLoginInput = styled.input`
 const StLoginBtn = styled.button`
   background-color: white;
   border: 1px solid #4B89DC;
+  width: 100px;
+  height: 38px;
   display: inline-block;
-  margin: 40px 38px;
+  margin: 40px 30px;
   border-radius: 4px;
   color: #4B89DC;
   font-weight: bold;

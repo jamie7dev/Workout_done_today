@@ -59,7 +59,7 @@ const Post = () => {
         // };
         axios({
             method: "POST",
-            url: "http://localhost:3001/posts",
+            url: "http://15.164.212.207:8080/post",
             mode: "cors",
             headers: {
                 "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.

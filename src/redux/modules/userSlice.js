@@ -1,20 +1,15 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-
+//로그인 토큰 받아오기
 export const __login = createAsyncThunk(
   "data/login",
   async (payload, thunkAPI) => {
-      try {
-          console.log(payload);
-          const data =  await axios.post("http://15.164.212.207:8080/api/login", payload);
-          console.log(data);
-          return thunkAPI.fulfillWithValue(data.data);
-        } catch (error) {
-          return thunkAPI.rejectWithValue(error);
-        }
+      
   }
 );
+
+
 
 export const userSlice = createSlice({
 
@@ -23,9 +18,14 @@ export const userSlice = createSlice({
     user:null //user has not loged in
   },
   reducers: {
-    login: (state, action) => {
-      state.user = action.payload;
-      axios.post("http://15.164.212.207:8080/api/login", action.payload)
+    // login: (state, action) => {
+    //   state.user = action.payload;
+    //   axios.post("http://15.164.212.207:8080/api/member/login", action.payload)
+    // },
+    logout(state){
+      localStorage.removeItem("token1")   //로그아웃은 token, username 제거
+      localStorage.removeItem("token2")
+      localStorage.removeItem("username")      
     }
   },
 
@@ -47,5 +47,5 @@ export const userSlice = createSlice({
 
 
 
-export const { login } = userSlice.actions;
+export const { login, logout } = userSlice.actions;
 export default userSlice.reducer;

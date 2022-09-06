@@ -17,7 +17,7 @@ const Router = () => {
         <Route path='main' element={<Main />} />
         <Route path='form' element={<Form />} />
         <Route path='post' element={<Post />} />
-        {/* <Route path='detail' element={<Detail />} /> */}
+        {/* <Route path='detail/:id' element={<Detail />} /> */}
         <Route path='*' element={<div>404 Not Found</div>} />
       </Routes>
     </BrowserRouter>
