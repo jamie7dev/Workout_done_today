@@ -1,9 +1,8 @@
 import React, { useState} from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-<<<<<<< HEAD
-// import axios from "axios";
-import { __signUP, __checkId } from "../../redux/modules/signUp";
+import axios from "axios";
+import { __checkId } from "../../redux/modules/signUp";
 import { useNavigate } from "react-router-dom";
 
 
@@ -155,8 +154,6 @@ const Form = () => {
                         name="username"
                         id="username"
                         value={input.username} />
-                        {usernameError && 
-                        <div className="invalid-input">양식에 맞게 입력해주세요</div>}
                     <StButton content={"check"} onClick={onIdCheckHandler}>중복확인</StButton>
                 </InputWrap>
                 <StSmallLabel>* 아이디는 영어와 숫자로 4자이상 10자 이하로 입력해주세요. *</StSmallLabel>
@@ -169,8 +166,7 @@ const Form = () => {
                         name="password"
                         id="password"
                         value={input.password} />
-                        {passwordError && 
-                        <div className="invalid-input">양식에 맞게 입력해주세요</div>}
+                        
                 </InputWrap>
                 <StSmallLabel style={{ marginLeft: "50px" }}>* 비밀번호는 영어, 숫자 포함 8자이상 20자이하로 입력해주세요 *</StSmallLabel>
                 <InputWrap >
