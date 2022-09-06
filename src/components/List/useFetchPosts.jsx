@@ -8,14 +8,15 @@ import axios from "axios";
  *                  
  * @returns 
  */
-const useFetchPosts = (postId) => {
-    const [posts, setPosts] = useState(null);
+const useFetchPosts = () => {
+    const [posts, setPosts] = useState([]);
 
     const fetchPosts = async () => {
-        const URL = postId !== null ? `http://15.164.212.207:8080/post/${postId}` : `http://localhost:3001/posts`;
+        const URL = `http://15.164.212.207:8080/api/list`;
         const response = await axios.get(URL).catch(error => console.log(error));
 
-        setPosts(response.data);
+        setPosts(response.data.data);
+        console.log("response is", response);
     };
 
     useEffect(() => {
@@ -24,5 +25,7 @@ const useFetchPosts = (postId) => {
 
     return posts;
 }
+
+
 
 export default useFetchPosts;

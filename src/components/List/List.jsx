@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import Card from "./Card";
-import useFetchPost from "./useFetchPost";
+import useFetchPosts from "./useFetchPosts";
 import { useNavigate } from "react-router-dom";
 
 const List = () => {
-  const posts = useFetchPost(null);
+  const posts = useFetchPosts(null);
   const navigate = useNavigate();
   return (
     <>
