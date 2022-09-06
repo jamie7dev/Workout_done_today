@@ -3,9 +3,6 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 <<<<<<< HEAD
 // import axios from "axios";
-=======
-import axios from "axios";
->>>>>>> a711a37 (제발)
 import { __signUP, __checkId } from "../../redux/modules/signUp";
 import { useNavigate } from "react-router-dom";
 
