@@ -101,7 +101,10 @@ const Form = () => {
                 console.log(data);
                 if(data.data.success===false)
                     alert(data.data.error.message);
-                else alert("회원가입이 완료되었습니다.");
+                else {
+                    alert("회원가입이 완료되었습니다.");
+                    navigate('/');
+                }
                 // return thunkAPI.fulfillWithValue(data.data);
               } catch (error) {
                 // return thunkAPI.rejectWithValue(error);
@@ -109,7 +112,7 @@ const Form = () => {
               }
             // dispatch(__signUP(user));
             // axios.post("http://15.164.212.207:8080/api/memeber/signup", user);
-            // navigate('/');
+            
         }
         console.log(validation());
         // else {
