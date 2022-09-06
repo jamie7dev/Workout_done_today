@@ -34,11 +34,8 @@ const Form = () => {
         setInput({ ...input, [name]: value });
     };
     const onChangePassword = (e) => {
-<<<<<<< HEAD
-        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
-=======
+
         const passwordRegex = /^(?=.*[A-Za-z])(?=.*[0-9]).{8,20}$/;
->>>>>>> a711a37 (제발)
 
         if ((!e.target.value || (passwordRegex.test(e.target.value)))) setPasswordError(false);
         else setPasswordError(true);
@@ -96,16 +93,7 @@ const Form = () => {
         if(input.password !== input.passwordConfirm){
             return alert('비밀번호가 일치하지 않습니다')
         }
-<<<<<<< HEAD
-        dispatch(__signUP(user));
-        // axios.post("http://15.164.212.207:8080/api/memeber/signup", user);
-        if(validation()) {
-            navigate('/');
-        } else {
-            alert("가입에 실패했습니다!");
-        }
-        
-=======
+
         else {
             try {
                 // console.log(payload);
@@ -130,7 +118,6 @@ const Form = () => {
         if(validation()) {
             
         } 
->>>>>>> a711a37 (제발)
         return;
     };
     

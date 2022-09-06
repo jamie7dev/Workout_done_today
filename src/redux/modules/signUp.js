@@ -14,7 +14,6 @@ const initialState = {
 export const __signUP = createAsyncThunk(
   "data/signup",
   async (payload, thunkAPI) => {
-<<<<<<< HEAD
       try {
           console.log(payload);
           const data =  await axios.post("http://15.164.212.207:8080/api/member/signup", payload);
@@ -29,16 +28,7 @@ export const __signUP = createAsyncThunk(
         } catch (error) {
           return thunkAPI.rejectWithValue(error);
         }
-=======
-      // try {
-      //     console.log(payload);
-      //     const data =  await axios.post("http://15.164.212.207:8080/api/signup", payload);
-      //     console.log(data);
-      //     return thunkAPI.fulfillWithValue(data.data);
-      //   } catch (error) {
-      //     return thunkAPI.rejectWithValue(error);
-      //   }
->>>>>>> a711a37 (제발)
+
   }
 );
 
