@@ -2,14 +2,11 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-// import { useDispatch } from "react-redux";
-import { __login } from "../../redux/modules/userSlice";
 import axios from "axios";
 
 
 const Login = () => {
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
   
 
   const initialState = {
