@@ -14,7 +14,7 @@ const Card = forwardRef((props, ref) => {
                     navigate(`/detail/${props.post.postId}`);
                 }}>
 
-                    {props.post.imageSrc && (
+                    {props.post.imageUrl && (
                         <img
                             src={props.post.imageUrl}
                             alt="preview-img"
@@ -36,7 +36,10 @@ const Card = forwardRef((props, ref) => {
                     <p style={{ color: "black" }}>
                         제목 : {props.post.title}
                     </p>
-                    <p style={{ color: "black" }}>조회수 :{props.post.watch} </p>
+
+                    <p style={{ color: "black" }}>
+                        조회수 :{props.post.watch}
+                    </p>
 
 
                 </StBox>

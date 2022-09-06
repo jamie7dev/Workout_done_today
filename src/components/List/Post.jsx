@@ -32,15 +32,15 @@ const Post = () => {
                 setImageSrc(reader.result);
                 resolve();
             };
-            axios({
-                method: "POST",
-                url: "http://15.164.212.207:8080/api/upload",          //백앤드 서버로 변경함
-                mode: "cors",
-                headers: {
-                    "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.
-                },
-                data: formData, // data 전송시에 반드시 생성되어 있는 formData 객체만 전송 하여야 한다.
-            })
+            // axios({
+            //     method: "POST",
+            //     url: "http://15.164.212.207:8080/api/upload",          //백앤드 서버로 변경함
+            //     mode: "cors",
+            //     headers: {
+            //         "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.
+            //     },
+            //     data: formData, // data 전송시에 반드시 생성되어 있는 formData 객체만 전송 하여야 한다.
+            // })
         });
 
     };
@@ -63,9 +63,14 @@ const Post = () => {
     const addHandler = () => {
         const { title, content, } = input;
 
+        let variables = [{
+            title: title,
+            content: content
+        }]
+
         const json = JSON.stringify(input)
-        const titleblob = new Blob([json], { type: "application/json" })
-        const contentblob = new Blob([json], { type: "application/json" })
+        const titleblob = new Blob([variables[0].title], { type: "application/json" })
+        const contentblob = new Blob([variables[0].content], { type: "application/json" })
 
         formData.append('title', titleblob);
         formData.append('content', contentblob);
@@ -84,9 +89,11 @@ const Post = () => {
         // };
         axios({
             method: "POST",
-            url: "http://15.164.212.207:8080/api/post",          //백앤드 서버로 변경함
+            url: "http://15.164.212.207:8080/api/upload/multi",          //백앤드 서버로 변경함
             mode: "cors",
             headers: {
+                "Authorization": localStorage.getItem("Authorization"),   //accesstoken
+                "RefreshToken": localStorage.getItem("RefreshToken"),
                 "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.
             },
             data: formData, // data 전송시에 반드시 생성되어 있는 formData 객체만 전송 하여야 한다.
