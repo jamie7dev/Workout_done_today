@@ -4,12 +4,21 @@ import axios from "axios";
 
 const Post = () => {
 
+
+    // //image url 로 변경하기
+    // let blob = new Blob([new ArrayBuffer()], { type: "image/png" });
+    // const url = window.URL.createObjectURL(blob); // blob:http://localhost:1234/28ff8746-94eb-4dbe-9d6c-2443b581dd30
+    // document.getElementById("file").src = url;
+
+
+
     //preview file
     const [imageSrc, setImageSrc] = useState("");
     const [formData] = useState(new FormData());
-    console.log("formData is", formData);
+    // console.log("formData is", formData);
+
     const imageUpload = (fileBlob) => {
-        console.log("fileblob is", fileBlob);
+        // console.log("fileblob is", fileBlob);
         formData.append('file', fileBlob);
 
         for (var pair of formData.entries()) {
@@ -23,7 +32,17 @@ const Post = () => {
                 setImageSrc(reader.result);
                 resolve();
             };
+            axios({
+                method: "POST",
+                url: "http://15.164.212.207:8080/api/upload",          //백앤드 서버로 변경함
+                mode: "cors",
+                headers: {
+                    "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.
+                },
+                data: formData, // data 전송시에 반드시 생성되어 있는 formData 객체만 전송 하여야 한다.
+            })
         });
+
     };
 
     //이미지업로드input창 styled 하기위해
@@ -32,22 +51,28 @@ const Post = () => {
         imageInput.current.click();
     };
 
-    // //formData 보내보기 
 
 
     // 게시글 데이터를 보내기위해
     const [input, setInput] = useState({
         title: "",
-        body: "",
+        content: "",
         imageSrc: ""
     });
 
     const addHandler = () => {
-        const { title, body, } = input;
-        formData.append('title', title);
-        formData.append('body', body);
-        console.log("formData is", formData);
+        const { title, content, } = input;
 
+        const json = JSON.stringify(input)
+        const titleblob = new Blob([json], { type: "application/json" })
+        const contentblob = new Blob([json], { type: "application/json" })
+
+        formData.append('title', titleblob);
+        formData.append('content', contentblob);
+
+
+        // console.log("formData is", formData);
+        console.log(typeof (formData));
         for (var pair of formData.entries()) {
             console.log(pair[0] + ', ' + pair[1]);
         }
@@ -55,18 +80,20 @@ const Post = () => {
         // const annoyance = {
         //     title: title,
         //     body: body,
-        //     imageSrc: imageSrc
+        //     imageSrc: imageSrcd
         // };
         axios({
             method: "POST",
-            url: "http://15.164.212.207:8080/post",
+            url: "http://15.164.212.207:8080/api/post",          //백앤드 서버로 변경함
             mode: "cors",
             headers: {
                 "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.
             },
             data: formData, // data 전송시에 반드시 생성되어 있는 formData 객체만 전송 하여야 한다.
         })
-        window.location.href = '/main';
+
+
+        // window.location.href = '/main';
 
 
     };
@@ -125,9 +152,9 @@ const Post = () => {
                         <StBodyInput placeholder="내용을 입력해주세요."
                             onChange={inputHandler}
                             type="text"
-                            name="body"
-                            id="body"
-                            value={input.body} />
+                            name="content"
+                            id="content"
+                            value={input.content} />
                     </InputWrap>
 
                     <JoinBtn type="button"
