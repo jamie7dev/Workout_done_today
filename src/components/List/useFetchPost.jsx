@@ -12,7 +12,7 @@ const useFetchPosts = (postId) => {
     const [posts, setPosts] = useState(null);
 
     const fetchPosts = async () => {
-        const URL = postId !== null ? `http://localhost:3001/posts/${postId}` : `http://localhost:3001/posts`;
+        const URL = postId !== null ? `http://15.164.212.207:8080/post/${postId}` : `http://localhost:3001/posts`;
         const response = await axios.get(URL).catch(error => console.log(error));
 
         setPosts(response.data);

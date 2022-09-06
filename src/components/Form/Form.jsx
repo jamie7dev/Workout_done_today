@@ -2,11 +2,13 @@ import React, { useState} from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 // import axios from "axios";
-import { __signUP } from "../../redux/modules/signUp";
+import { __signUP, __checkId } from "../../redux/modules/signUp";
+import { useNavigate } from "react-router-dom";
 
 
 const Form = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     // const timestamp = new Date().getTime();
 
     const [input, setInput] = useState({
@@ -19,10 +21,12 @@ const Form = () => {
     const [passwordError, setPasswordError] = useState(false);
     const [passwordConfirmError, setPasswordConfirmError] = useState(false);
    
+    
+
 
 //유효성 체크    
     const onChangeUsername = (e) => {
-        const userIdRegex = /^[A-Za-z0-9+]{5,}$/;
+        const userIdRegex = /^[A-Za-z0-9+]{4,10}$/;
         if ((!e.target.value || (userIdRegex.test(e.target.value)))) setUsernameError(false);
         else setUsernameError(true);
         // setInput(e.target.value);
@@ -30,7 +34,7 @@ const Form = () => {
         setInput({ ...input, [name]: value });
     };
     const onChangePassword = (e) => {
-        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
 
         if ((!e.target.value || (passwordRegex.test(e.target.value)))) setPasswordError(false);
         else setPasswordError(true);
@@ -60,6 +64,20 @@ const Form = () => {
     }
 
 
+    //아이디 중복 체크
+    const onIdCheckHandler = async (e) => {
+        e.preventDefault();
+        const { username } = input;
+        const user = {
+            username: username
+        };       
+        dispatch(__checkId(user));
+        
+        return;
+      };
+
+     
+
     //회원가입 버튼 누르면 실행
     const addHandler = () => {
         const { username, password, passwordConfirm } = input;
@@ -68,9 +86,18 @@ const Form = () => {
             password: password,
             passwordConfirm: passwordConfirm
         };
+        if(input.password !== input.passwordConfirm){
+            return alert('비밀번호가 일치하지 않습니다')
+        }
         dispatch(__signUP(user));
         // axios.post("http://15.164.212.207:8080/api/memeber/signup", user);
-        if(validation()) return;
+        if(validation()) {
+            navigate('/');
+        } else {
+            alert("가입에 실패했습니다!");
+        }
+        
+        return;
     };
     
     // useEffect(() => {
@@ -94,10 +121,10 @@ const Form = () => {
                         id="username"
                         value={input.username} />
                         {usernameError && 
-                        <div className="invalid-input">* 아이디는 영어와 숫자로 4자이상 8자 이하로 입력해주세요. *</div>}
-                    <StButton>중복확인</StButton>
+                        <div className="invalid-input">양식에 맞게 입력해주세요</div>}
+                    <StButton content={"check"} onClick={onIdCheckHandler}>중복확인</StButton>
                 </InputWrap>
-                <StSmallLabel>* 아이디는 영어와 숫자로 4자이상 8자 이하로 입력해주세요. *</StSmallLabel>
+                <StSmallLabel>* 아이디는 영어와 숫자로 4자이상 10자 이하로 입력해주세요. *</StSmallLabel>
 
                 <InputWrap >
                     <StLabel >비밀번호</StLabel>
@@ -108,12 +135,12 @@ const Form = () => {
                         id="password"
                         value={input.password} />
                         {passwordError && 
-                        <div className="invalid-input">* 비밀번호는 영어, 숫자 포함 8자이상 20자이하로 입력해주세요 * </div>}
+                        <div className="invalid-input">양식에 맞게 입력해주세요</div>}
                 </InputWrap>
                 <StSmallLabel style={{ marginLeft: "50px" }}>* 비밀번호는 영어, 숫자 포함 8자이상 20자이하로 입력해주세요 *</StSmallLabel>
                 <InputWrap >
                     <StLabel>비밀번호 재확인</StLabel>
-                    <StInput placeholder="passwordConfirm."
+                    <StInput placeholder="password를 한 번 더 입력해주세요."
                         onChange={onChangePasswordConfirm}
                         type="password"
                         name="passwordConfirm"
@@ -200,6 +227,7 @@ const StButton = styled.button`
   border-radius: 5px;
   padding: 5px;
   margin: 0 0 0 38px;
+  cursor: pointer;
 `;
 
 const StSmallLabel = styled.label`
