@@ -8,7 +8,7 @@ const Detail = () => {
     const params = useParams();
     const postId = parseInt(params.id);
     const data = useFetchPost(postId);
-
+    console.log(data);
     return (
         <main>
             <Header />
