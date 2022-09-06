@@ -10,6 +10,7 @@ const initialState = {
 };
 
 
+
 export const __signUP = createAsyncThunk(
   "data/signup",
   async (payload, thunkAPI) => {
@@ -19,11 +20,15 @@ export const __signUP = createAsyncThunk(
           console.log(data);
           if(data.data.success===false)
               alert(data.data.error.message);
+          else alert("사용 가능한 아이디입니다.");
+          if(data.data.success===false)
+              alert(data.data.error.message);
           else alert("회원가입이 완료되었습니다.");
           return thunkAPI.fulfillWithValue(data.data);
         } catch (error) {
           return thunkAPI.rejectWithValue(error);
         }
+
   }
 );
 
@@ -41,6 +46,16 @@ export const __checkId = createAsyncThunk(
         } catch (error) {
           return thunkAPI.rejectWithValue(error);
         }
+
+      // try {
+      //     console.log(payload);
+      //     const data =  await axios.post("http://15.164.212.207:8080/api/signup", payload);
+      //     console.log(data);
+      //     return thunkAPI.fulfillWithValue(data.data);
+      //   } catch (error) {
+      //     return thunkAPI.rejectWithValue(error);
+      //   }
+
   }
 );
 

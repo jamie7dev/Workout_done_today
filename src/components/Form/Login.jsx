@@ -2,14 +2,11 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-// import { useDispatch } from "react-redux";
-import { __login } from "../../redux/modules/userSlice";
 import axios from "axios";
 
 
 const Login = () => {
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
   
 
   const initialState = {
@@ -56,6 +53,7 @@ const Login = () => {
       // console.log(payload);
       const data =  await axios.post("http://15.164.212.207:8080/api/member/login", inputValue);
       localStorage.setItem("Authorization", data.headers.authorization)    //accesstoken
+
       localStorage.setItem("RefreshToken", data.headers.refreshtoken)   //refreshtoken 
       localStorage.setItem("username",data.data.data.username)
       console.log(data);

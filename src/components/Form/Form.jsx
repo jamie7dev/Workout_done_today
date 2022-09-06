@@ -1,8 +1,8 @@
 import React, { useState} from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-// import axios from "axios";
-import { __signUP, __checkId } from "../../redux/modules/signUp";
+import axios from "axios";
+import { __checkId } from "../../redux/modules/signUp";
 import { useNavigate } from "react-router-dom";
 
 
@@ -34,7 +34,8 @@ const Form = () => {
         setInput({ ...input, [name]: value });
     };
     const onChangePassword = (e) => {
-        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
+
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*[0-9]).{8,20}$/;
 
         if ((!e.target.value || (passwordRegex.test(e.target.value)))) setPasswordError(false);
         else setPasswordError(true);
@@ -59,9 +60,12 @@ const Form = () => {
         if(!input.password) setPasswordError(true);
         if(!input.passwordConfirm) setPasswordConfirmError(true);
 
-        if(input.username && input.password && input.passwordConfirm) return true;
+        if(usernameError && passwordError && passwordConfirmError) return true;
         else return false;
     }
+    console.log(input.username);
+    console.log(input.password);
+    console.log(input.passwordConfirm);
 
 
     //아이디 중복 체크
@@ -79,7 +83,7 @@ const Form = () => {
      
 
     //회원가입 버튼 누르면 실행
-    const addHandler = () => {
+    const addHandler = async() => {
         const { username, password, passwordConfirm } = input;
         const user = {
             username: username,
@@ -89,14 +93,34 @@ const Form = () => {
         if(input.password !== input.passwordConfirm){
             return alert('비밀번호가 일치하지 않습니다')
         }
-        dispatch(__signUP(user));
-        // axios.post("http://15.164.212.207:8080/api/memeber/signup", user);
-        if(validation()) {
-            navigate('/');
-        } else {
-            alert("가입에 실패했습니다!");
+
+        else {
+            try {
+                // console.log(payload);
+                const data =  await axios.post("http://15.164.212.207:8080/api/member/signup", user);
+                console.log(data);
+                if(data.data.success===false)
+                    alert(data.data.error.message);
+                else {
+                    alert("회원가입이 완료되었습니다.");
+                    navigate('/');
+                }
+                // return thunkAPI.fulfillWithValue(data.data);
+              } catch (error) {
+                // return thunkAPI.rejectWithValue(error);
+                alert("가입에 실패했습니다");
+              }
+            // dispatch(__signUP(user));
+            // axios.post("http://15.164.212.207:8080/api/memeber/signup", user);
+            
         }
-        
+        console.log(validation());
+        // else {
+        //     alert("가입에 실패했습니다!");
+        // }
+        if(validation()) {
+            
+        } 
         return;
     };
     
@@ -120,8 +144,6 @@ const Form = () => {
                         name="username"
                         id="username"
                         value={input.username} />
-                        {usernameError && 
-                        <div className="invalid-input">양식에 맞게 입력해주세요</div>}
                     <StButton content={"check"} onClick={onIdCheckHandler}>중복확인</StButton>
                 </InputWrap>
                 <StSmallLabel>* 아이디는 영어와 숫자로 4자이상 10자 이하로 입력해주세요. *</StSmallLabel>
@@ -134,8 +156,7 @@ const Form = () => {
                         name="password"
                         id="password"
                         value={input.password} />
-                        {passwordError && 
-                        <div className="invalid-input">양식에 맞게 입력해주세요</div>}
+                        
                 </InputWrap>
                 <StSmallLabel style={{ marginLeft: "50px" }}>* 비밀번호는 영어, 숫자 포함 8자이상 20자이하로 입력해주세요 *</StSmallLabel>
                 <InputWrap >
