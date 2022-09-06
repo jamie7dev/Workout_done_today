@@ -7,52 +7,64 @@ import { useNavigate } from "react-router-dom";
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   const onClickHandler = () => {
     dispatch(logout());
     window.alert("로그인 페이지로 이동합니다");
     navigate('/');
   };
-  
-    return (
-      <>
-        <StNavigation>
-          <StLink to="/"><span>로그인(임시)</span></StLink>
-          <StLink to="/post"><span>게시글 작성하기</span></StLink>
-          <button onClick={onClickHandler}>로그아웃</button>
-        </StNavigation>        
-        <HeaderStyle>  
-            <StTitle>✊ 오늘 운동 완료 했니? ✊</StTitle>
-        </HeaderStyle>
-      </>
-    );
+
+  return (
+    <>
+      <HeaderStyle>
+        <StLink to="/main"><span>Home</span></StLink>
+        <StTitle>✊ 오늘 운동 완료 했니? ✊</StTitle>
+
+        <StButton style={{ float: "right" }}
+          onClick={onClickHandler}>
+          로그아웃
+        </StButton>
+      </HeaderStyle>
+    </>
+  );
 };
 
 const HeaderStyle = styled.header`
-  display: flex;
   color: #4B89DC;
-  height: 10vh;
-  padding: 20px;
- 
-`;
-
-const StNavigation = styled.nav`
-  padding: 10px 30px;
+  height: 8%;
+  padding: 10px;
   button {
     float: right;
   }
+  display: flex;
+  flex-direction: row;
+  -webkit-box-align: center;
+  align-items: center;
+  justify-content: space-between;
 `;
+
+const StButton = styled.button`
+  text-decoration: none;
+  border: none;
+  font-size: 16px;
+  color: white;
+  background-color: #4B89DC;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  
+`;
+
 
 const StLink = styled(Link)`
   text-decoration: none;
   
   span {
-    font-size: 16px;
+    font-size: 25px;
     color: white;
     background-color: #4B89DC;
     border-radius: 5px;
-    padding: 5px;
-    margin: 5px;
+    padding: 20%;
   }
 `;
 

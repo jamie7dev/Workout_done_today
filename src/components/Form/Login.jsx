@@ -52,7 +52,8 @@ const Login = () => {
     try {
       // console.log(payload);
       const data =  await axios.post("http://15.164.212.207:8080/api/member/login", inputValue);
-      localStorage.setItem("authorization", data.headers.authorization)    //accesstoken
+      localStorage.setItem("Authorization", data.headers.authorization)    //accesstoken
+
       localStorage.setItem("RefreshToken", data.headers.refreshtoken)   //refreshtoken 
       localStorage.setItem("username",data.data.data.username)
       console.log(data);
@@ -78,6 +79,7 @@ const Login = () => {
     <>
     <form onSubmit={onSubmitHandler}>
       <StLoginContainer>
+        <ImgContainer/>            {/* 이미지 파일넣어서 배경넣음!! */}
         <Link to="/main"><span>home</span></Link>
         <StLoginBox>
           <StLoginHeader>
@@ -184,6 +186,14 @@ const StLoginBtn = styled.button`
     background-color : #4B89DC;
     color : white;
   }
+`;
+
+const ImgContainer = styled.div`
+  background-image:url('https://ifh.cc/g/78Zfl5.png') ;
+  width: 30vw;
+  height: 30vw;
+  background-size: cover;
+
 `;
 
 // const StSignupBtn = styled.div`

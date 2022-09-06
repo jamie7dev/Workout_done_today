@@ -11,12 +11,12 @@ const Card = forwardRef((props, ref) => {
         <div>
             <StContainer>
                 <StBox ref={ref} onClick={() => {
-                    navigate(`/detail/${props.post.id}`);
+                    navigate(`/detail/${props.post.postId}`);
                 }}>
 
-                    {props.post.imageSrc && (
+                    {props.post.imageUrl && (
                         <img
-                            src={props.post.imageSrc}
+                            src={props.post.imageUrl}
                             alt="preview-img"
                             width="70%"
                             height="60%"
@@ -30,13 +30,16 @@ const Card = forwardRef((props, ref) => {
                     )}
 
                     <p style={{ color: "black" }}>
-                        작성자 : {props.post.title}
+                        작성자 : {props.post.username}
                     </p>
 
                     <p style={{ color: "black" }}>
-                        내용 : {props.post.body}
+                        제목 : {props.post.title}
                     </p>
-                    <p style={{ color: "black" }}>조회수 : </p>
+
+                    <p style={{ color: "black" }}>
+                        조회수 :{props.post.watch}
+                    </p>
 
 
                 </StBox>

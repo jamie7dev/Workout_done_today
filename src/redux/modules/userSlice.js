@@ -1,30 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-//로그인 토큰 받아오기
-// export const __login = createAsyncThunk(
-//   "data/login",
-//   async (payload, thunkAPI) => {
-      
-//   }
-// );
 
 
 
 export const userSlice = createSlice({
 
-  name:"user", 
-  initialState:{
-    user:null //user has not loged in
+  name: "user",
+  initialState: {
+    user: null //user has not loged in
   },
   reducers: {
     // login: (state, action) => {
     //   state.user = action.payload;
     //   axios.post("http://15.164.212.207:8080/api/member/login", action.payload)
     // },
-    logout(state){
-      localStorage.removeItem("authorization")   //로그아웃은 token, username 제거
+    logout(state) {
+      localStorage.removeItem("Authorization")   //로그아웃은 token, username 제거
       localStorage.removeItem("RefreshToken")
-      localStorage.removeItem("username")      
+      localStorage.removeItem("username")
     }
   },
 
