@@ -16,45 +16,55 @@ const Header = () => {
 
   return (
     <>
-      <StNavigation>
-
-        <StLink to="/post"><span>게시글 작성하기</span></StLink>
-
-        <button onClick={onClickHandler}>로그아웃</button>
-
-      </StNavigation>
       <HeaderStyle>
+        <StLink to="/main"><span>Home</span></StLink>
         <StTitle>✊ 오늘 운동 완료 했니? ✊</StTitle>
+
+        <StButton style={{ float: "right" }}
+          onClick={onClickHandler}>
+          로그아웃
+        </StButton>
       </HeaderStyle>
     </>
   );
 };
 
 const HeaderStyle = styled.header`
-  display: flex;
   color: #4B89DC;
   height: 8%;
-  padding: 20px;
- 
-`;
-
-const StNavigation = styled.nav`
-  padding: 10px 30px;
+  padding: 10px;
   button {
     float: right;
   }
+  display: flex;
+  flex-direction: row;
+  -webkit-box-align: center;
+  align-items: center;
+  justify-content: space-between;
 `;
+
+const StButton = styled.button`
+  text-decoration: none;
+  border: none;
+  font-size: 16px;
+  color: white;
+  background-color: #4B89DC;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  
+`;
+
 
 const StLink = styled(Link)`
   text-decoration: none;
   
   span {
-    font-size: 16px;
+    font-size: 25px;
     color: white;
     background-color: #4B89DC;
     border-radius: 5px;
-    padding: 5px;
-    margin: 5px;
+    padding: 20%;
   }
 `;
 
