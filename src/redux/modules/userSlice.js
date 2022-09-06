@@ -22,8 +22,8 @@ export const userSlice = createSlice({
     //   axios.post("http://15.164.212.207:8080/api/member/login", action.payload)
     // },
     logout(state){
-      localStorage.removeItem("token1")   //로그아웃은 token, username 제거
-      localStorage.removeItem("token2")
+      localStorage.removeItem("authorization")   //로그아웃은 token, username 제거
+      localStorage.removeItem("RefreshToken")
       localStorage.removeItem("username")      
     }
   },

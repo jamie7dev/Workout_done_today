@@ -52,8 +52,8 @@ const Login = () => {
     try {
       // console.log(payload);
       const data =  await axios.post("http://15.164.212.207:8080/api/member/login", inputValue);
-      localStorage.setItem("token1", data.headers.authorization)    //accesstoken
-      localStorage.setItem("token2", data.headers.refreshtoken)   //refreshtoken 
+      localStorage.setItem("authorization", data.headers.authorization)    //accesstoken
+      localStorage.setItem("RefreshToken", data.headers.refreshtoken)   //refreshtoken 
       localStorage.setItem("username",data.data.data.username)
       console.log(data);
       navigate('/main');
