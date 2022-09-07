@@ -1,42 +1,24 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { createComment} from "../../redux/modules/Comment"
+import { useParams } from "react-router-dom";
 
-const MiniPost = () => {
-    const [formData] = useState(new FormData());
-
+const MiniPost = ({post}) => {
+    const dispatch = useDispatch();
+    const {id} = useParams()
     const [input, setInput] = useState({
         content: "",
     });
-
-    const addHandler = () => {
-        const { content } = input;
-
-        let variables = [{
-            content: content
-        }]
-
-        const contentblob = new Blob([variables[0].content], { type: "application/json" })
-
-        formData.append('content', contentblob);
-        console.log("data is ", content);
-
-        axios({
-            method: "POST",
-            url: 'http://3.38.192.170:8080/api/comment',          //백앤드 서버로 변경함
-            mode: "cors",
-            headers: {
-                "Authorization": localStorage.getItem("Authorization"),   //accesstoken
-                "RefreshToken": localStorage.getItem("RefreshToken"),
-                "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.
-            },
-            data: formData, // data 전송시에 반드시 생성되어 있는 formData 객체만 전송 하여야 한다.
-        })
-
-
-        // window.location.reload();
-
-
+    const addHandler = async(comment) => {
+      let a = await axios.post("http://3.38.192.170:8080/api/comment",
+      {postId:id,content:comment},
+      {headers: {
+        "Authorization": localStorage.getItem("Authorization"),   //accesstoken
+        "RefreshToken": localStorage.getItem("RefreshToken")}})
+        console.log(a)
+      dispatch(createComment(a?.data?.data))
     };
 
     const inputHandler = (e) => {
@@ -73,7 +55,7 @@ const MiniPost = () => {
                     </InputWrap>
 
                     <JoinBtn type="button"
-                        onClick={() => { addHandler(); console.log("input is", input); }}>
+                        onClick={() => { addHandler(input.content); console.log("input is", input); }}>
                         🙆올리기🙆
                     </JoinBtn>
 
