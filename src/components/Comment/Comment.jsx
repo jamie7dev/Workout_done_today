@@ -1,13 +1,20 @@
-import useFetchComment from "./useFetchComment";
+// import useFetchComment from "./useFetchComment";
 import styled from "styled-components";
 import MiniCard from "./MiniCard";
 import React, { useState } from "react";
 import MiniPost from "./MiniPost";
+import {__getComments} from "../../redux/modules/Comment"
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const Comment = (props) => {
-    const posts = useFetchComment(props.post.id);
-    // console.log(posts);
+    const dispatch = useDispatch();
+    const posts = useSelector((state)=>state.comment)
+    // const posts = useFetchComment(props.post.id);
     const [visible, setVisivle] = useState(false);
+    useEffect(()=>{
+        dispatch(__getComments(props.post.id));
+    },[dispatch])
 
     return (
         <StCommentContainer>
@@ -21,9 +28,9 @@ const Comment = (props) => {
             {visible && <MiniPost />}
             <StCommentBox>
                 <StCard>
-                    {posts?.data?.map((post) => {
+                    {posts?.data?.data?.map((post) => {
                         // kry=1 post=json{}
-                        return <MiniCard key={post.id} post={post} />
+                        return <MiniCard key={post?.id} post={post} id={props.post.id} />
                     })}
                 </StCard>
             </StCommentBox>
@@ -52,4 +59,3 @@ const StCard = styled.div`
 const StAddBtn = styled.button`
     
 `;
-

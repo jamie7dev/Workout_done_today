@@ -2,6 +2,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import userSlice from '../modules/userSlice';
 import signupSlice from '../modules/signUp';
 import postSlice from "../modules/postSlice";
+import commentSlice from '../modules/Comment';
+
 
 const store = configureStore({
 

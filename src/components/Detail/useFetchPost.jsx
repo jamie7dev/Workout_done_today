@@ -13,13 +13,12 @@ const useFetchPost = (postId) => {
 
     const fetchPost = async () => {
         const URL = `http://3.38.192.170:8080/api/post/${postId}`;
-        const response = await axios.get(URL, {
-            headers: {
-                "Authorization": localStorage.getItem("Authorization"),   //accesstoken
-                "RefreshToken": localStorage.getItem("RefreshToken"),
-                "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.
-            },
-        }).catch(error => console.log(error));
+        const response = await axios.get(URL, 
+            {headers: {
+            "Authorization": localStorage.getItem("Authorization"),   //accesstoken
+            "RefreshToken": localStorage.getItem("RefreshToken"),
+            "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.
+        }}).catch(error => console.log(error));
 
         setPost(response.data.data);
         console.log("response is", response);
