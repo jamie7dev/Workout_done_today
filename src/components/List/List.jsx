@@ -35,8 +35,9 @@ const List = () => {
 export default List;
 
 const StListContainer = styled.div`
-  background-color: whitesmoke;
+  /* background-color: whitesmoke; */
   width: 100vw;
+  min-width: 900px;
   height: 100%;
   margin: auto;
 
@@ -51,27 +52,33 @@ const StCard = styled.div`
 `;
 
 const PostTitle = styled.div`
-  margin  : auto;
+  /* margin  : auto; */
   font-size: 40px;
   font-weight: bold;
   text-align: center;
-  margin-top: 20px;
+  margin-top: 10px;
+  padding-top: 10px;
   height: 60px;
   background-color: whitesmoke;
-  width: 100%
+  width: 100%;
+  min-width: 900px;
 `;
 
 const StButton = styled.button`
-  margin-left:60px ;
+  margin-left: 200px;
   font-size: 30px;
   font-weight: 600;
   border-radius: 10px;
-  background-color: whitesmoke;
-  border: none;
-  text-decoration: underline;
+  /* background-color: whitesmoke; */
+  /* border: none; */
+  /* text-decoration: underline; */
+  background-color: #f2f294;
+  border: 2px solid #4B89DC;
+  text-decoration: none;
+  cursor: pointer;
   :hover{
-    background-color: #f2f294;
-    border: 4px solid #4B89DC;
+    background-color: white;
+    border: 2px solid #4B89DC;
     text-decoration: none;
   }
   :touch-action{

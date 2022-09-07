@@ -123,20 +123,21 @@ export default Login;
 //styled components
 
 const StLoginContainer = styled.div`
-width: 400px;
+width: 900px;
 height: 600px;
-margin: 0 auto;
+margin: 200px auto;
 `;
 const ImgContainer = styled.div`
   background-image:url('https://ifh.cc/g/78Zfl5.png') ;
   width: 400px;
   height: 400px;
   background-size: cover;
+  float: left;
 `;
 
 const StLoginBox = styled.div`
   background-color: white;
-  width: 100%;
+  width: 400px;
   height: 400px;
   display: flex;
   align-items: center;
@@ -146,7 +147,7 @@ const StLoginBox = styled.div`
   color: #4B89DC;
   border-radius: 10px;
   line-height: 40px;
-  
+  float: right;
 `;
 
 const StLoginHeader = styled.div`
@@ -158,16 +159,17 @@ const StLoginHeader = styled.div`
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   h1 {
+    font-size: 40px;
     line-height: 50px;
   }
 `;
 
 const StLoginInputBox = styled.div`
-margin-top: 20px;
+margin-top: 30px;
 `;
 
 const StLoginInput = styled.input`
-  font-size: 16px;
+  font-size: 18px;
   padding: 4px;
   margin: 20px;
   width: 180px;
@@ -185,6 +187,7 @@ const StLoginBtn = styled.button`
   margin: 40px 30px;
   border-radius: 4px;
   color: #4B89DC;
+  font-size: 20px;
   font-weight: bold;
   cursor: pointer;
   padding-left: 1rem;
@@ -194,21 +197,3 @@ const StLoginBtn = styled.button`
     color : white;
   }
 `;
-
-
-
-// const StSignupBtn = styled.div`
-//   background-color: #4B89DC;
-//   outline: none;
-//   display: inline-block;
-//   margin: 44px 30px;
-//   outline: none;
-//   border: none;
-//   border-radius: 4px;
-//   color: white;
-//   font-weight: bold;
-//   cursor: pointer;
-//   padding-left: 1rem;
-//   padding-right: 1rem; 
-  
-// `;

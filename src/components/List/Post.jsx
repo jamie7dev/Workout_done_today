@@ -1,9 +1,10 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Post = () => {
-
+    const navigate = useNavigate();
 
     // //image url 로 변경하기
     // let blob = new Blob([new ArrayBuffer()], { type: "image/png" });
@@ -34,7 +35,7 @@ const Post = () => {
             };
             // axios({
             //     method: "POST",
-            //     url: "http://15.164.212.207:8080/api/upload",          //백앤드 서버로 변경함
+            //     url: "http://3.38.192.170:8080/api/upload",          //백앤드 서버로 변경함
             //     mode: "cors",
             //     headers: {
             //         "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.
@@ -101,6 +102,7 @@ const Post = () => {
 
 
         // window.location.href = '/main';
+        navigate('/main');
 
 
     };
@@ -136,8 +138,8 @@ const Post = () => {
                             <img
                                 src={imageSrc}
                                 alt="preview-img"
-                                width="50%"
-                                height="60%"
+                                width="60%"
+                                height="40%"
                             />
                         )}
                     </div>
@@ -181,8 +183,8 @@ export default Post;
 const StPostContainer = styled.div`
 background-color: whitesmoke;
 width: 100%;
+min-width: 900px;
 max-height: 300vw;
-margin-top: 40px;
 color: #4B89DC;
 border-radius: 8px;
 `;
@@ -197,12 +199,14 @@ const StPostHeader = styled.div`
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   /* font-family: 'Do Hyeon', sans-serif; */
-  font-size: 30px;
+  font-size: 26px;
 `;
 
 const StForm = styled.div`
   background-color: whitesmoke;
   width: 100%;
+  min-width: 500px;
+  min-height: 300px;
   height: 100%;
   display: flex;
   align-items: center;
@@ -216,8 +220,11 @@ const StForm = styled.div`
 const StImage = styled.div`
   background-color: #d6ecf3;
   border-radius: 15px;
-  width: 40vw;
-  max-height: 30vw;
+  width: 60%;
+  height: 40%;
+  /* max-height: 30vw; */
+  /* min-width: 500px; */
+  /* min-height: 100px; */
   display: inline-block;
   padding-bottom: 35px;
   margin-bottom: 20px;
@@ -226,9 +233,12 @@ const StImage = styled.div`
 
 const StButton = styled.button`
   border: none;
+  background-color: #dfdddd;
   font-size: 20px;
   border-radius: 10px;
-  margin-top: 30px;
+  margin: 30px;
+  padding: 1%;
+  cursor: pointer;
   :hover{
   font-weight: 800 ;
   background-color: #ffa2a2;
@@ -245,7 +255,6 @@ const StPostContent = styled.div`
 
 const StTitleInput = styled.input`
   margin-top: 20px;
-
   width: 60%;
   padding: 15px 2%;
   font-size: 15px;
@@ -262,11 +271,13 @@ const StBodyInput = styled.input`
 `;
 
 const InputWrap = styled.div`
-    border-radius: 15px;
+border-radius: 15px;
+padding: 10px;
+    
 `;
 
 const StLabel = styled.label`
-  font-size : 15px;
+  font-size : 20px;
   font-weight: 600;
   margin-right: 20px;
 `;
@@ -275,9 +286,10 @@ const JoinBtn = styled.button`
   background-color: #dfdddd;
   border: none;
   border-radius: 15px;
-  font-size: 18px;
-  padding: 1.5%;
+  font-size: 20px;
+  padding: 1.2%;
   margin-bottom: 20px;
+  cursor: pointer;
   :hover{
     background-color: #c1c1f9;
   }

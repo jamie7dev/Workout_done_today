@@ -31,6 +31,7 @@ const Header = () => {
 
 const HeaderStyle = styled.header`
   color: #4B89DC;
+  min-width: 900px;
   height: 8%;
   padding: 10px;
   button {
@@ -43,6 +44,25 @@ const HeaderStyle = styled.header`
   justify-content: space-between;
 `;
 
+const StLink = styled(Link)`
+  text-decoration: none;
+  margin: 30px;
+  width: 30px;
+  span {
+    font-size: 24px;
+    color: white;
+    background-color: #4B89DC;
+    border-radius: 5px;
+    padding: 22%;
+  }
+`;
+
+const StTitle = styled.div`
+  margin: 10px;
+  font-size: 60px;
+  font-weight: bold;  
+`;
+
 const StButton = styled.button`
   text-decoration: none;
   border: none;
@@ -51,27 +71,8 @@ const StButton = styled.button`
   background-color: #4B89DC;
   border-radius: 5px;
   padding: 5px;
-  margin: 5px;
-  
-`;
-
-
-const StLink = styled(Link)`
-  text-decoration: none;
-  
-  span {
-    font-size: 25px;
-    color: white;
-    background-color: #4B89DC;
-    border-radius: 5px;
-    padding: 20%;
-  }
-`;
-
-const StTitle = styled.div`
-  margin: 0 auto;
-  font-size: 60px;
-  font-weight: bold;  
+  margin-right: 20px;
+  cursor: pointer;
 `;
 
 export default Header;

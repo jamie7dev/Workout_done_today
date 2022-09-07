@@ -97,6 +97,7 @@ const Form = () => {
         else {
             try {
                 // console.log(payload);
+
                 const data = await axios.post("http://3.38.192.170:8080/api/member/signup", user);
                 console.log(data);
                 if (data.data.success === false)
@@ -111,7 +112,8 @@ const Form = () => {
                 alert("가입에 실패했습니다");
             }
             // dispatch(__signUP(user));
-            // axios.post("http://15.164.212.207:8080/api/memeber/signup", user);
+            // axios.post("http://3.38.192.170:8080/api/memeber/signup", user);
+            
 
         }
         console.log(validation());
