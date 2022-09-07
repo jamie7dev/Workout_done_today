@@ -12,7 +12,7 @@ export const userSlice = createSlice({
   reducers: {
     // login: (state, action) => {
     //   state.user = action.payload;
-    //   axios.post("http://15.164.212.207:8080/api/member/login", action.payload)
+    //   axios.post("http://3.38.192.170:8080/api/member/login", action.payload)
     // },
     logout(state) {
       localStorage.removeItem("Authorization")   //로그아웃은 token, username 제거

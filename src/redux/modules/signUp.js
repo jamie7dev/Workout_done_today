@@ -16,7 +16,7 @@ export const __signUP = createAsyncThunk(
   async (payload, thunkAPI) => {
       try {
           console.log(payload);
-          const data =  await axios.post("http://15.164.212.207:8080/api/member/signup", payload);
+          const data =  await axios.post("http://3.38.192.170:8080/api/member/signup", payload);
           console.log(data);
           if(data.data.success===false)
               alert(data.data.error.message);
@@ -37,7 +37,7 @@ export const __checkId = createAsyncThunk(
   async (payload, thunkAPI) => {
       try {
           console.log(payload);
-          const data =  await axios.post("http://15.164.212.207:8080/api/member/signup/duplicate", payload);
+          const data =  await axios.post("http://3.38.192.170:8080/api/member/signup/duplicate", payload);
           console.log(data);
           if(data.data.success===false)
               alert(data.data.error.message);
@@ -49,7 +49,7 @@ export const __checkId = createAsyncThunk(
 
       // try {
       //     console.log(payload);
-      //     const data =  await axios.post("http://15.164.212.207:8080/api/signup", payload);
+      //     const data =  await axios.post("http://3.38.192.170:8080/api/signup", payload);
       //     console.log(data);
       //     return thunkAPI.fulfillWithValue(data.data);
       //   } catch (error) {
@@ -68,7 +68,7 @@ export const signupSlice = createSlice({
   reducers: {
     // addUser: (state, action) => {
     //   state.user = action.payload;
-    //   axios.post("http://15.164.212.207:8080/api/member/signup", action.payload)
+    //   axios.post("http://3.38.192.170:8080/api/member/signup", action.payload)
     // }
   },
 

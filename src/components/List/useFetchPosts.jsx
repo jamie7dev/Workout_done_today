@@ -12,7 +12,7 @@ const useFetchPosts = () => {
     const [posts, setPosts] = useState([]);
 
     const fetchPosts = async () => {
-        const URL = `http://15.164.212.207:8080/api/list`;
+        const URL = `http://3.38.192.170:8080/api/list`;
         const response = await axios.get(URL).catch(error => console.log(error));
 
         setPosts(response.data.data);
