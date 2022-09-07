@@ -102,7 +102,6 @@ const Post = () => {
 
 
         // window.location.href = '/main';
-        navigate('/main');
 
 
     };
