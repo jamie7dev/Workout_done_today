@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
 
 const DetailCard = (props) => {
+    const [formData] = useState(new FormData());
+    const deleteHandler = () => {
+        axios({
+            method: "DELETE",
+            url: `http://3.38.192.170:8080/api/post/${props.post.id}`,        //백앤드 서버로 변경함
+            mode: "cors",
+            headers: {
+                "Authorization": localStorage.getItem("Authorization"),   //accesstoken
+                "RefreshToken": localStorage.getItem("RefreshToken"),
+                "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.
+            },
+            data: formData, // data 전송시에 반드시 생성되어 있는 formData 객체만 전송 하여야 한다.
+        })
+    };
 
     return (
         <>
@@ -42,7 +57,7 @@ const DetailCard = (props) => {
                 <StBtnBox>
                     <StButton>수정하기</StButton>
 
-                    <StButton>삭제하기</StButton>
+                    <StButton onClick={() => { deleteHandler(); }}>삭제하기</StButton>
 
                     <StButton>또 인증하기!</StButton>
                 </StBtnBox>
