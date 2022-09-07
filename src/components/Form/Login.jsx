@@ -53,7 +53,6 @@ const Login = () => {
       // console.log(payload);
       const data =  await axios.post("http://15.164.212.207:8080/api/member/login", inputValue);
       localStorage.setItem("Authorization", data.headers.authorization)    //accesstoken
-
       localStorage.setItem("RefreshToken", data.headers.refreshtoken)   //refreshtoken 
       localStorage.setItem("username",data.data.data.username)
       console.log(data);
@@ -80,7 +79,7 @@ const Login = () => {
     <form onSubmit={onSubmitHandler}>
       <StLoginContainer>
         <ImgContainer/>            {/* 이미지 파일넣어서 배경넣음!! */}
-        <Link to="/main"><span>home</span></Link>
+        {/* <Link to="/main"><span>home</span></Link> */}
         <StLoginBox>
           <StLoginHeader>
             <h1> 오늘 운동 완료했니? </h1>
@@ -122,10 +121,17 @@ export default Login;
 
 
 //styled components
+
 const StLoginContainer = styled.div`
 width: 400px;
 height: 600px;
-margin: 150px auto;
+margin: 0 auto;
+`;
+const ImgContainer = styled.div`
+  background-image:url('https://ifh.cc/g/78Zfl5.png') ;
+  width: 400px;
+  height: 400px;
+  background-size: cover;
 `;
 
 const StLoginBox = styled.div`
@@ -140,6 +146,7 @@ const StLoginBox = styled.div`
   color: #4B89DC;
   border-radius: 10px;
   line-height: 40px;
+  
 `;
 
 const StLoginHeader = styled.div`
@@ -188,13 +195,7 @@ const StLoginBtn = styled.button`
   }
 `;
 
-const ImgContainer = styled.div`
-  background-image:url('https://ifh.cc/g/78Zfl5.png') ;
-  width: 30vw;
-  height: 30vw;
-  background-size: cover;
 
-`;
 
 // const StSignupBtn = styled.div`
 //   background-color: #4B89DC;
