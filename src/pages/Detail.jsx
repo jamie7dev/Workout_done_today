@@ -5,11 +5,13 @@ import Header from "../components/Header/Header";
 import DetailCard from "../components/Detail/DetailCard";
 import Comment from "../components/Comment/Comment";
 
+
 const Detail = () => {
     const params = useParams();
     const postId = parseInt(params.id);
     const data = useFetchPost(postId);
-    console.log(data);
+
+    // console.log(data);
     return (
         <main>
             <Header />
@@ -18,7 +20,7 @@ const Detail = () => {
                 <DetailCard post={data} />
             )}
             {data && (
-                <Comment post={data} />
+                <Comment post={params} />
             )}
         </main>
     );

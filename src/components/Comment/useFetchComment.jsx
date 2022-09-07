@@ -15,8 +15,8 @@ const useFetchComment = (postId) => {
         const URL = `http://3.38.192.170:8080/api/comment/${postId}`;
         const response = await axios.get(URL).catch(error => console.log(error));
 
-        setPost(response.data.data);
-        console.log("response is", response);
+        setPost(response.data);
+        console.log("postID is ", postId);
     };
 
     useEffect(() => {

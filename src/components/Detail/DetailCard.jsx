@@ -88,7 +88,8 @@ const StContainer = styled.div`
   text-align: center;
   margin: 30px auto;
   background-color: #8ebefd;
-  width: 1000px;
+
+  width: 70%;
   height: auto;
   border-radius: 30px;
   max-height: 50vw;
@@ -96,6 +97,7 @@ const StContainer = styled.div`
   display: flex;
   /* justify-content: center; */
   position: relative;
+
 `;
 
 
