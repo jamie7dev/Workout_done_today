@@ -72,7 +72,7 @@ const StContainer = styled.div`
   text-align: center;
   margin-top: 30px;
   background-color: #8ebefd;
-  width: 40%;
+  width: 70%;
   height: auto;
   border-radius: 30px;
   margin-left:auto;
@@ -81,6 +81,7 @@ const StContainer = styled.div`
   margin-bottom: 30px;
   margin-top: 20px;
   padding-top: 20px;
+  display: flex;
 `;
 
 const StImgBox = styled.div`
