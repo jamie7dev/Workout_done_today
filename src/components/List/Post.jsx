@@ -89,7 +89,7 @@ const Post = () => {
         // };
         axios({
             method: "POST",
-            url: "http://15.164.212.207:8080/api/upload/multi",          //백앤드 서버로 변경함
+            url: "http://3.38.192.170:8080/api/upload/multi",          //백앤드 서버로 변경함
             mode: "cors",
             headers: {
                 "Authorization": localStorage.getItem("Authorization"),   //accesstoken

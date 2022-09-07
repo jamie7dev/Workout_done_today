@@ -51,7 +51,7 @@ const Login = () => {
 
     try {
       // console.log(payload);
-      const data =  await axios.post("http://15.164.212.207:8080/api/member/login", inputValue);
+      const data =  await axios.post("http://3.38.192.170:8080/api/member/login", inputValue);
       localStorage.setItem("Authorization", data.headers.authorization)    //accesstoken
       localStorage.setItem("RefreshToken", data.headers.refreshtoken)   //refreshtoken 
       localStorage.setItem("username",data.data.data.username)

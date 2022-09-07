@@ -14,20 +14,20 @@ const initialState = {
 export const __signUP = createAsyncThunk(
   "data/signup",
   async (payload, thunkAPI) => {
-      try {
-          console.log(payload);
-          const data =  await axios.post("http://15.164.212.207:8080/api/member/signup", payload);
-          console.log(data);
-          if(data.data.success===false)
-              alert(data.data.error.message);
-          else alert("사용 가능한 아이디입니다.");
-          if(data.data.success===false)
-              alert(data.data.error.message);
-          else alert("회원가입이 완료되었습니다.");
-          return thunkAPI.fulfillWithValue(data.data);
-        } catch (error) {
-          return thunkAPI.rejectWithValue(error);
-        }
+    try {
+      console.log(payload);
+      const data = await axios.post("http://3.38.192.170:8080/api/member/signup", payload);
+      console.log(data);
+      if (data.data.success === false)
+        alert(data.data.error.message);
+      else alert("사용 가능한 아이디입니다.");
+      if (data.data.success === false)
+        alert(data.data.error.message);
+      else alert("회원가입이 완료되었습니다.");
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
 
   }
 );
@@ -35,26 +35,26 @@ export const __signUP = createAsyncThunk(
 export const __checkId = createAsyncThunk(
   "data/checkId",
   async (payload, thunkAPI) => {
-      try {
-          console.log(payload);
-          const data =  await axios.post("http://15.164.212.207:8080/api/member/signup/duplicate", payload);
-          console.log(data);
-          if(data.data.success===false)
-              alert(data.data.error.message);
-          else alert("사용 가능한 아이디입니다.");
-          return thunkAPI.fulfillWithValue(data.data);
-        } catch (error) {
-          return thunkAPI.rejectWithValue(error);
-        }
+    try {
+      console.log(payload);
+      const data = await axios.post("http://3.38.192.170:8080/api/member/signup/duplicate", payload);
+      console.log(data);
+      if (data.data.success === false)
+        alert(data.data.error.message);
+      else alert("사용 가능한 아이디입니다.");
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
 
-      // try {
-      //     console.log(payload);
-      //     const data =  await axios.post("http://15.164.212.207:8080/api/signup", payload);
-      //     console.log(data);
-      //     return thunkAPI.fulfillWithValue(data.data);
-      //   } catch (error) {
-      //     return thunkAPI.rejectWithValue(error);
-      //   }
+    // try {
+    //     console.log(payload);
+    //     const data =  await axios.post("http://15.164.212.207:8080/api/signup", payload);
+    //     console.log(data);
+    //     return thunkAPI.fulfillWithValue(data.data);
+    //   } catch (error) {
+    //     return thunkAPI.rejectWithValue(error);
+    //   }
 
   }
 );
@@ -63,7 +63,7 @@ export const __checkId = createAsyncThunk(
 
 
 export const signupSlice = createSlice({
-  name:"signup", 
+  name: "signup",
   initialState,
   reducers: {
     // addUser: (state, action) => {
