@@ -47,14 +47,6 @@ export const __checkId = createAsyncThunk(
           return thunkAPI.rejectWithValue(error);
         }
 
-      // try {
-      //     console.log(payload);
-      //     const data =  await axios.post("http://3.38.192.170:8080/api/signup", payload);
-      //     console.log(data);
-      //     return thunkAPI.fulfillWithValue(data.data);
-      //   } catch (error) {
-      //     return thunkAPI.rejectWithValue(error);
-      //   }
 
   }
 );
