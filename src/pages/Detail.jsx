@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import useFetchPost from "../components/Detail/useFetchPost";
 import Header from "../components/Header/Header";
 import DetailCard from "../components/Detail/DetailCard";
+import Comment from "../components/Comment/Comment";
 
 const Detail = () => {
     const params = useParams();
@@ -15,6 +16,9 @@ const Detail = () => {
 
             {data && (
                 <DetailCard post={data} />
+            )}
+            {data && (
+                <Comment post={data} />
             )}
         </main>
     );

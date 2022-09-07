@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import axios from "axios";
@@ -20,11 +20,11 @@ const Form = () => {
     const [usernameError, setUsernameError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
     const [passwordConfirmError, setPasswordConfirmError] = useState(false);
-   
-    
 
 
-//유효성 체크    
+
+
+    //유효성 체크    
     const onChangeUsername = (e) => {
         const userIdRegex = /^[A-Za-z0-9+]{4,10}$/;
         if ((!e.target.value || (userIdRegex.test(e.target.value)))) setUsernameError(false);
@@ -56,11 +56,11 @@ const Form = () => {
 
     //유효성 검사
     const validation = () => {
-        if(!input.username) setUsernameError(true);
-        if(!input.password) setPasswordError(true);
-        if(!input.passwordConfirm) setPasswordConfirmError(true);
+        if (!input.username) setUsernameError(true);
+        if (!input.password) setPasswordError(true);
+        if (!input.passwordConfirm) setPasswordConfirmError(true);
 
-        if(usernameError && passwordError && passwordConfirmError) return true;
+        if (usernameError && passwordError && passwordConfirmError) return true;
         else return false;
     }
     console.log(input.username);
@@ -74,60 +74,62 @@ const Form = () => {
         const { username } = input;
         const user = {
             username: username
-        };       
+        };
         dispatch(__checkId(user));
-        
-        return;
-      };
 
-     
+        return;
+    };
+
+
 
     //회원가입 버튼 누르면 실행
-    const addHandler = async() => {
+    const addHandler = async () => {
         const { username, password, passwordConfirm } = input;
         const user = {
             username: username,
             password: password,
             passwordConfirm: passwordConfirm
         };
-        if(input.password !== input.passwordConfirm){
+        if (input.password !== input.passwordConfirm) {
             return alert('비밀번호가 일치하지 않습니다')
         }
 
         else {
             try {
                 // console.log(payload);
-                const data =  await axios.post("http://3.38.192.170:8080/api/member/signup", user);
+
+                const data = await axios.post("http://3.38.192.170:8080/api/member/signup", user);
                 console.log(data);
-                if(data.data.success===false)
+                if (data.data.success === false)
                     alert(data.data.error.message);
                 else {
                     alert("회원가입이 완료되었습니다.");
                     navigate('/');
                 }
                 // return thunkAPI.fulfillWithValue(data.data);
-              } catch (error) {
+            } catch (error) {
                 // return thunkAPI.rejectWithValue(error);
                 alert("가입에 실패했습니다");
-              }
+            }
             // dispatch(__signUP(user));
             // axios.post("http://3.38.192.170:8080/api/memeber/signup", user);
             
+
         }
         console.log(validation());
         // else {
         //     alert("가입에 실패했습니다!");
         // }
-        if(validation()) {
-            
-        } 
+        if (validation()) {
+
+        }
         return;
     };
-    
+
     // useEffect(() => {
     //     dispatch(__signUP());
     //   }, [dispatch]);
-    
+
 
 
     return (
@@ -156,7 +158,7 @@ const Form = () => {
                         name="password"
                         id="password"
                         value={input.password} />
-                        
+
                 </InputWrap>
                 <StSmallLabel style={{ marginLeft: "50px" }}>* 비밀번호는 영어, 숫자 포함 8자이상 20자이하로 입력해주세요 *</StSmallLabel>
                 <InputWrap >
@@ -167,7 +169,7 @@ const Form = () => {
                         name="passwordConfirm"
                         id="passWordConfirm"
                         value={input.passwordConfirm} />
-                        {passwordConfirmError && 
+                    {passwordConfirmError &&
                         <div className="invalid-input">비밀번호가 일치하지 않습니다.</div>}
                 </InputWrap>
                 <JoinBtn type="button"
