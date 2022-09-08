@@ -1,70 +1,62 @@
-# Getting Started with Create React App
+# 프로젝트 이름 : 오운완
+#### 프로젝트 설명 : 운동을 하고 인증하면 운동해야 하는 사람들이 동기부여를 받아 자신도 운동을 하고 사진으로 인증을 하게끔 하는 웹 페이지
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Back Github : [https://github.com/BeomSeogKim/week6]
 
-## Available Scripts
 
-In the project directory, you can run:
+## 기능 구현 List
+1. 회원가입
+    - ID 중복 검사
+    - ID 길이 및 영문, 숫자 유효성 검사
+    - PW 및 PW Confirm 유효성 검사
+2. 로그인
+    - ID, PW 입력시 공백 유효성 검사
+    - ID, PW 일치 검사
+    - Access Token과 Refresh Token을 local storage에 저장하고
+       모든 페이지에서 로그인 유지
+    
+3. 게시글 작성
+    - 게시글 CRUD 구현 (작성자만 수정/삭제 가능)
+    - 댓글도 함께 조회
+    - 이미지 파일 업로드시 미리보기 구현
+    - 게시글 수정시 이미지, 타이틀, 내용 수정 가능하며 리로드 없이 바로 확인 가능
+    
+4. 댓글 작성
+    - 댓글 CRUD 구현 (작성자만 수정/삭제 가능)
+    - 리로드 없이 변경사항 바로 확인 가능
+    
+5. 조회수 count
+    - 상세 게시글 조회시 게시글 조회수 증가 
+    - (메인 페이지 각 게시물에서도 확인 가능)
 
-### `yarn start`
+-----------------
+아쉬운 점 
+1. 좋아요 기능 구현
+    - 회원은 각 게시글 및 댓글에 대해서 한번씩만 좋아요가 가능함
+    - 좋아요를 누르지 않은 게시글 및 댓글에 대해서는 좋아요 취소가 불가능함
+    - 회원의 좋아요 내역을 알 수 있도록 설계함
+    
+2. 마이페이지 기능 구현
+    - 회원이 작성한 게시글 조회 가능
+    - 회원이 작성한 댓글 조회 가능
+    - 회원이 좋아요를 누른 게시글 조회 가능
+    - 회원이 좋아요를 누른 댓글 조회 가능
+3. Access Token은 보안상 cookie에 저장하고 
+    Refresh Token만 local storage에 저장하는 걸 구현했으면 더 좋았을 것 같음.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Front) TroubleShooting 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- 새로고침 해야 게시물 변동 사항 반영되는 문제  
+    * => Redux toolkit 사용으로 미리 보여주기로 해결
+- 게시물 및 댓글 요청 응답시 시간 파일이 있어 데이터를 꺼내기 어려운 문제
+    * => Backend에 요청해 Response 내용 수정 후 기능 구현
+- 헤더에 Refresh-Token 으로 와서 Front 단에서 "-" 를 처리하기 어려워 수정 요청함
+    * => 헤더에 담기는 토큰 이름을 RefreshToken 으로 수정 
+- 작성자만 게시글과 댓글을 수정/삭제 할 수 있는 기능
+  삼항연산자 이용해서 작성자가 현재 로그인 된 유저일 경우에만
+  (localstorage에 username까지 저장해서 토큰과 같이 가지고 다님) 수정/삭제 버튼이 보이게 구현
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## API 명세서
+참고링크 : https://www.notion.so/12-SA-0a642b7c476b45c39f7497b9609b46ee
+# ERD
+![image](https://user-images.githubusercontent.com/110332047/188419758-81684510-152b-46e6-8c11-16531a50bb57.png)
