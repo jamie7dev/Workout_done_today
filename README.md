@@ -1,4 +1,4 @@
-# 프로젝트 이름 : 오운완
+# 프로젝트 이름 : 오운완 (Workout Done Today)
 #### 프로젝트 설명 : 운동을 하고 인증하면 운동해야 하는 사람들이 동기부여를 받아 자신도 운동을 하고 사진으로 인증을 하게끔 하는 웹 페이지
 
 ### Back Github : [https://github.com/BeomSeogKim/week6]
