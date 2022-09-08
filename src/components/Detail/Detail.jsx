@@ -1,12 +1,21 @@
-import React from "react";
-import Header from "../Header/Header";
-import DetailCard from "./DetailCard";
+// 상세
+import { useParams } from "react-router-dom";
+import Header from "../components/Header/Header";
+import DetailCard from "../components/Detail/DetailCard";
+import Comment from "../components/Comment/Comment";
+import { __getDetail } from "../redux/modules/detail";
 
-const detail = () => {
-    <>
-        <Header />
-        <DetailCard />
-    </>
+const Detail = () => {
+    const params = useParams();
+
+    return (
+        <main>
+            <Header />
+                <DetailCard />
+            
+                <Comment post={params} />
+        </main>
+    );
 };
 
-export default detail;
+export default Detail;

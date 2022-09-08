@@ -20,6 +20,7 @@ const Header = () => {
     <>
       <HeaderStyle>
         <StLink to="/main"><span>Home</span></StLink>
+        {/* <button onClick={() => {navigate('/main')}}>Home</button> */}
         <StTitle>✊ 오늘 운동 완료 했니? ✊</StTitle>
 
         <StButton style={{ float: "right" }}

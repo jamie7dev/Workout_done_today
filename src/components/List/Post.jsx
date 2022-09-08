@@ -94,21 +94,19 @@ const Post = () => {
         //     method: "POST",
         //     url: "http://3.38.192.170:8080/api/post",          //백앤드 서버로 변경함
         //     mode: "cors",
-        // headers: {
-        //     "Authorization": localStorage.getItem("Authorization"),   //accesstoken
-        //     "RefreshToken": localStorage.getItem("RefreshToken"),
-        //     "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.
-        // },
+            // headers: {
+            //     "Authorization": localStorage.getItem("Authorization"),   //accesstoken
+            //     "RefreshToken": localStorage.getItem("RefreshToken"),
+            //     "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.
+            // },
         //     data: formData, // data 전송시에 반드시 생성되어 있는 formData 객체만 전송 하여야 한다.
         // })
-        let a = axios.post("http://3.38.192.170:8080/api/post", formData,
-            {
-                headers: {
-                    "Authorization": localStorage.getItem("Authorization"),   //accesstoken
-                    "RefreshToken": localStorage.getItem("RefreshToken"),
-                    "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.
-                }
-            })
+        let a = axios.post("http://3.38.192.170:8080/api/post", formData, 
+        {headers: {
+            "Authorization": localStorage.getItem("Authorization"),   //accesstoken
+            "RefreshToken": localStorage.getItem("RefreshToken"),
+            "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.
+        }})
         console.log(a);
         // dispatch(createPost())
         // window.location.href = '/main';

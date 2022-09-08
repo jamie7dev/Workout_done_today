@@ -7,11 +7,11 @@ const initialState = {
   error: null,
 };
 
-export const __getPost = createAsyncThunk(
-  "data/getPosts",
+export const __getDetail = createAsyncThunk(
+  "data/getDetail",
   async (payload, thunkAPI) => {
       try {
-          const data =  await axios.get(`http://3.38.192.170:8080/api/list`,
+          const data =  await axios.get(`http://3.38.192.170:8080/api/post/${payload}`,
           {headers: {
             "Authorization": localStorage.getItem("Authorization"),   //accesstoken
             "RefreshToken": localStorage.getItem("RefreshToken"),
@@ -25,34 +25,32 @@ export const __getPost = createAsyncThunk(
   }
 );
 
-export const postSlice = createSlice({
-  name: "post",
+export const detailSlice = createSlice({
+  name: "detail",
   initialState,
   reducers: {
-    createPost: (state, action) => {
-      state.data.data.push(action.payload);
-    },
-    removePost: (state, action) => {
-        let index = state.data.data.findIndex(
-          (post) => post.postId === action.payload);
-        state.data.data.splice(index, 1);
-    },
+    updatePost: (state, action) => {
+      console.log(action.payload)
+    //     let index = state.data.findIndex(post => post.postId === action.payload.id);
+    //     state.data.splice(index, 1, action.payload);
+    state.data.data = action.payload
+    }  
   },
 
 extraReducers: {
-  [__getPost.pending]: (state) => {
+  [__getDetail.pending]: (state) => {
     state.isLoading = true; // 네트워크 요청이 시작되면 로딩상태를 true로 변경합니다.
   },
-  [__getPost.fulfilled]: (state, action) => {
+  [__getDetail.fulfilled]: (state, action) => {
     state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
     state.data = action.payload; // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
   },
-  [__getPost.rejected]: (state, action) => {
+  [__getDetail.rejected]: (state, action) => {
     state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경합니다.
     state.error = action.payload; // catch 된 error 객체를 state.error에 넣습니다.
   },
   }
 });
 
-export const { createPost, removePost } = postSlice.actions;
-export default postSlice;
+export const { updatePost } = detailSlice.actions;
+export default detailSlice;
