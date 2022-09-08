@@ -1,6 +1,21 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
-
+//DB에서도 로그아웃
+export const __logout = createAsyncThunk(
+  "data/getComments",
+  async (payload, thunkAPI) => {
+      try {
+          console.log(payload);
+          const data =  await axios.post(`http://3.38.192.170:8080/api/member/logout`, 
+          {headers: {
+            "Authorization": localStorage.getItem("Authorization"),   //accesstoken
+            "RefreshToken": localStorage.getItem("RefreshToken"),
+        }});
+        } catch (error) {
+        }
+  }
+);
 
 
 export const userSlice = createSlice({
@@ -10,6 +25,7 @@ export const userSlice = createSlice({
     user: null //user has not loged in
   },
   reducers: {
+    //로그인은 redux 안 씀
     // login: (state, action) => {
     //   state.user = action.payload;
     //   axios.post("http://3.38.192.170:8080/api/member/login", action.payload)
@@ -39,5 +55,5 @@ export const userSlice = createSlice({
 
 
 
-export const { login, logout } = userSlice.actions;
+export const { logout } = userSlice.actions;
 export default userSlice.reducer;
