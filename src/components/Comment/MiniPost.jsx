@@ -103,27 +103,8 @@ const StForm = styled.div`
   border-bottom-right-radius: 8px;
 `;
 
-const StImage = styled.div`
-  background-color: #d6ecf3;
-  border-radius: 15px;
-  width: 40vw;
-  max-height: 30vw;
-  display: inline-block;
-  padding-bottom: 35px;
-  margin-bottom: 20px;
-  margin-top: 20px;
-`;
 
-const StButton = styled.button`
-  border: none;
-  font-size: 20px;
-  border-radius: 10px;
-  margin-top: 30px;
-  :hover{
-  font-weight: 800 ;
-  background-color: #ffa2a2;
-  }
-`;
+
 
 const StPostContent = styled.div`
   background-color: white;
@@ -142,14 +123,6 @@ const StTitleInput = styled.input`
   border-radius: 8px;
 `;
 
-const StBodyInput = styled.input`
-  margin-bottom: 20px;
-  margin-top:10px;
-  width: 60%;
-  padding: 15px 2%;
-  font-size: 15px;
-  border-radius: 8px;
-`;
 
 const InputWrap = styled.div`
     border-radius: 15px;

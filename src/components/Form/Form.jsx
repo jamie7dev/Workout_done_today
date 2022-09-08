@@ -23,8 +23,7 @@ const Form = () => {
 
 
 
-
-    //유효성 체크    
+    //유효성 체크(나중에 다른 방법 사용할 것)    
     const onChangeUsername = (e) => {
         const userIdRegex = /^[A-Za-z0-9+]{4,10}$/;
         if ((!e.target.value || (userIdRegex.test(e.target.value)))) setUsernameError(false);
@@ -111,8 +110,6 @@ const Form = () => {
                 // return thunkAPI.rejectWithValue(error);
                 alert("가입에 실패했습니다");
             }
-            // dispatch(__signUP(user));
-            // axios.post("http://3.38.192.170:8080/api/memeber/signup", user);
             
 
         }
@@ -126,11 +123,7 @@ const Form = () => {
         return;
     };
 
-    // useEffect(() => {
-    //     dispatch(__signUP());
-    //   }, [dispatch]);
-
-
+ 
 
     return (
         <ContainerWrap>

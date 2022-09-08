@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 import { logout } from '../../redux/modules/userSlice';
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { __logout } from "../../redux/modules/userSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onClickHandler = () => {
+    dispatch(__logout());
     dispatch(logout());
     window.alert("로그인 페이지로 이동합니다");
     navigate('/');

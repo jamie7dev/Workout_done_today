@@ -29,20 +29,20 @@ const MiniCard = (props) => {
                 <StBox>
                     <div>
                     <p style={{ color: "black" }}>
-                        작성자 : {props?.post?.author}
-                    </p>
+                        작성자 : {props?.post?.author}</p>
 
                     <p style={{ color: "black" }}>
-                        내용 : {props?.post?.content}
-                    </p>
+                        내용 : {props?.post?.content}</p>
                     </div>
+                    {localStorage.getItem("username") === props?.post?.author?
                     <div>
-                        <button onClick={()=>{
+                        <StUdtBtn onClick={()=>{
                             let change = prompt('수정할 내용을 입력해주세요.');
                             onUpdateHandler(change);
-                            }}>수정</button>
-                        <button onClick={()=>onRemoveHandler()}>삭제</button>
+                            }}>수정</StUdtBtn>
+                        <StRmvBtn onClick={()=>onRemoveHandler()}>삭제</StRmvBtn>
                     </div>
+                     :null}
                 </StBox>
             </StContainer>
         </div >

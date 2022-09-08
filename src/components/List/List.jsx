@@ -22,7 +22,7 @@ const List = () => {
           <StCard>
             {posts?.map((post) => {
               // kry=1 post=json{}
-              return <Card key={post.id} post={post} />
+              return <Card key={post.postId} post={post} />
             })}
           </StCard>
         </StListContainer>
