@@ -3,18 +3,18 @@ import styled from "styled-components";
 import MiniCard from "./MiniCard";
 import React, { useState } from "react";
 import MiniPost from "./MiniPost";
-import {__getComments} from "../../redux/modules/Comment"
+import { __getComments } from "../../redux/modules/Comment"
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 const Comment = (props) => {
     const dispatch = useDispatch();
-    const posts = useSelector((state)=>state.comment)
+    const posts = useSelector((state) => state.comment)
     // const posts = useFetchComment(props.post.id);
     const [visible, setVisivle] = useState(false);
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(__getComments(props.post.id));
-    },[dispatch])
+    }, [dispatch])
 
     return (
         <StCommentContainer>
