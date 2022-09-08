@@ -15,19 +15,6 @@ const Login = () => {
   }
 
   const [inputValue, setInputValue] = useState(initialState);
-
-
-  // const fetchLogin = async () => {
-  //   const { data } = await axios.get("http://localhost:3001/userinfo");
-  //    // 서버로부터 fetching한 데이터를 useState의 state로 set 합니다.
-  // };
-
-
-  // useEffect(() => {
-	// 	// effect 구문에 생성한 함수를 넣어 실행합니다.
-  //   fetchLogin();
-  // }, []);
-
   
 
   const onChangeHandler = (e) => {
@@ -41,13 +28,6 @@ const Login = () => {
     if (inputValue.username === "" || inputValue.password === "") {
       window.alert("아이디와 비밀번호를 입력해주세요.");
     }
-
-    // dispatch(__login({...inputValue,
-    //   username: inputValue.username,
-    //   password: inputValue.password,
-    //   loggedIn: true
-    // }));
-    // setInputValue(initialState);
 
     try {
       // console.log(payload);
@@ -72,14 +52,11 @@ const Login = () => {
   };
   
 
- 
-
   return (
     <>
     <form onSubmit={onSubmitHandler}>
       <StLoginContainer>
         <ImgContainer/>            {/* 이미지 파일넣어서 배경넣음!! */}
-        {/* <Link to="/main"><span>home</span></Link> */}
         <StLoginBox>
           <StLoginHeader>
             <h1> 오늘 운동 완료했니? </h1>

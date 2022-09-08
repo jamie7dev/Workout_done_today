@@ -10,7 +10,6 @@ const initialState = {
 };
 
 
-
 export const __signUP = createAsyncThunk(
   "data/signup",
   async (payload, thunkAPI) => {
@@ -32,6 +31,7 @@ export const __signUP = createAsyncThunk(
   }
 );
 
+//아이디 중복체크
 export const __checkId = createAsyncThunk(
   "data/checkId",
   async (payload, thunkAPI) => {
@@ -51,9 +51,7 @@ export const __checkId = createAsyncThunk(
   }
 );
 
-
-
-
+//회원가입 redux 안 씀
 export const signupSlice = createSlice({
   name: "signup",
   initialState,

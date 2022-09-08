@@ -42,15 +42,15 @@ const MiniCard = (props) => {
                             내용 : {props?.post?.content}
                         </p>
                     </div>
-                    {localStorage.getItem("username") === props?.post?.author ?
-                        <div>
-                            <button onClick={() => {
-                                let change = prompt('수정할 내용을 입력해주세요.');
-                                onUpdateHandler(change);
-                            }}>수정</button>
-                            <button onClick={() => onRemoveHandler()}>삭제</button>
-                        </div>
-                        : null}
+                    {localStorage.getItem("username") === props?.post?.author?
+                    <div>
+                        <StUdtBtn onClick={()=>{
+                            let change = prompt('수정할 내용을 입력해주세요.');
+                            onUpdateHandler(change);
+                            }}>수정</StUdtBtn>
+                        <StRmvBtn onClick={()=>onRemoveHandler()}>삭제</StRmvBtn>
+                    </div>
+                     :null}
                 </StBox>
             </StContainer>
         </div >
