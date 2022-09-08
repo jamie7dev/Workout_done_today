@@ -1,12 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 import Card from "./Card";
-import useFetchPosts from "./useFetchPosts";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { __getPost } from "../../redux/modules/addPost";
 
 const List = () => {
-  const posts = useFetchPosts(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const post = useSelector((state) => state.post)
+
+  useEffect(()=>{
+    dispatch(__getPost());
+  },[dispatch])
+
   return (
     <>
       <div>
@@ -20,7 +28,7 @@ const List = () => {
         </PostTitle>
         <StListContainer>
           <StCard>
-            {posts?.map((post) => {
+            {post?.data?.data?.map((post) => {
               // kry=1 post=json{}
               return <Card key={post.postId} post={post} />
             })}

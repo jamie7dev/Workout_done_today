@@ -2,10 +2,12 @@ import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { createPost } from "../../redux/modules/addPost";
+import { useDispatch } from "react-redux";
 
 const Post = () => {
     const navigate = useNavigate();
-
+    const dispatch = useDispatch();
     // //image url 로 변경하기
     // let blob = new Blob([new ArrayBuffer()], { type: "image/png" });
     // const url = window.URL.createObjectURL(blob); // blob:http://localhost:1234/28ff8746-94eb-4dbe-9d6c-2443b581dd30
@@ -88,19 +90,25 @@ const Post = () => {
         //     body: body,
         //     imageSrc: imageSrcd
         // };
-        axios({
-            method: "POST",
-            url: "http://3.38.192.170:8080/api/post",          //백앤드 서버로 변경함
-            mode: "cors",
-            headers: {
-                "Authorization": localStorage.getItem("Authorization"),   //accesstoken
-                "RefreshToken": localStorage.getItem("RefreshToken"),
-                "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.
-            },
-            data: formData, // data 전송시에 반드시 생성되어 있는 formData 객체만 전송 하여야 한다.
-        })
-
-
+        // axios({
+        //     method: "POST",
+        //     url: "http://3.38.192.170:8080/api/post",          //백앤드 서버로 변경함
+        //     mode: "cors",
+            // headers: {
+            //     "Authorization": localStorage.getItem("Authorization"),   //accesstoken
+            //     "RefreshToken": localStorage.getItem("RefreshToken"),
+            //     "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.
+            // },
+        //     data: formData, // data 전송시에 반드시 생성되어 있는 formData 객체만 전송 하여야 한다.
+        // })
+        let a = axios.post("http://3.38.192.170:8080/api/post", formData, 
+        {headers: {
+            "Authorization": localStorage.getItem("Authorization"),   //accesstoken
+            "RefreshToken": localStorage.getItem("RefreshToken"),
+            "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.
+        }})
+        console.log(a);
+        // dispatch(createPost())
         // window.location.href = '/main';
         navigate('/main');
 
