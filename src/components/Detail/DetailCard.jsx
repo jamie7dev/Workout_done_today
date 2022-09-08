@@ -1,11 +1,12 @@
-import React, { useState, useRef } from "react";
+import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { useDispatch } from "react-redux";
 import { removePost, updatePost } from "../../redux/modules/addPost"
 
-const DetailCard = (props) => {
+const DetailCard = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [input, setInput] = useState(false);
