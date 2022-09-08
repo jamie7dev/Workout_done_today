@@ -188,8 +188,6 @@ const DetailCard = (props) => {
 
 export default DetailCard;
 
-
-
 const StHeader = styled.div`
   margin  : auto;
   font-size: 30px;

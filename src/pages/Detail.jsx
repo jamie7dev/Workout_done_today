@@ -1,4 +1,3 @@
-// 상세
 import { useParams } from "react-router-dom";
 import Header from "../components/Header/Header";
 import DetailCard from "../components/Detail/DetailCard";
