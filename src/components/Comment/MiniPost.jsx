@@ -43,7 +43,7 @@ const MiniPost = ({ post }) => {
   return (
     <StPostContainer>
       <StPostHeader>
-        <p style={{ color: "blue" }}>댓글달기--->>></p>
+        <p style={{ color: "blue" }}>댓글달기---</p>
       </StPostHeader>
       <StForm>
 
