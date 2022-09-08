@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from 'axios';
-import { useDispatch } from "react-redux";
-import { removePost, updatePost } from "../../redux/modules/addPost"
+import { useDispatch, useSelector } from "react-redux";
+import { removePost } from "../../redux/modules/addPost"
+import { updatePost, __getDetail } from "../../redux/modules/detail";
 
-const DetailCard = () => {
-    const dispatch = useDispatch();
+const DetailCard = (props) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [input, setInput] = useState(false);
@@ -17,19 +17,30 @@ const DetailCard = () => {
         title: "",
         content: ""
     }
+    const params = useParams();
+    const postId = parseInt(params.id);
+    const data = useSelector((state) => state.detail)
+
+    useEffect(() => {
+        dispatch(__getDetail(postId));
+    }, [dispatch])
     const [post, setPost] = useState(initialState)
     const onRemovePost = async () => {
-        let a = await axios.delete(`http://3.38.192.170:8080/api/post/${props.post.id}`,
-            {
-                headers: {
-                    "Authorization": localStorage.getItem("Authorization"),   //accesstoken
-                    "RefreshToken": localStorage.getItem("RefreshToken"),
-                    "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.
-                }
-            });
-        window.confirm("삭제하시겠습니까?");
-        dispatch(removePost(props.post.id));
-        navigate("/main")
+
+        if (window.confirm("삭제하시겠습니까 ???")) {
+            let a = await axios.delete(`http://3.38.192.170:8080/api/post/${postId}`,
+                {
+                    headers: {
+                        "Authorization": localStorage.getItem("Authorization"),   //accesstoken
+                        "RefreshToken": localStorage.getItem("RefreshToken"),
+                        "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.
+                    }
+                });
+
+
+            dispatch(removePost(postId));
+            navigate("/main")
+        }
     }
 
 
@@ -46,13 +57,13 @@ const DetailCard = () => {
         const titleblob = new Blob([variables[0].title], { type: "application/json" })
         const contentblob = new Blob([variables[0].content], { type: "application/json" })
         console.log(titleblob)
-        formData.append('image', img);
+        formData.append('file', img);
         formData.append('title', titleblob);
         formData.append('content', contentblob);
         for (var pair of formData.entries()) {
             console.log(pair[0] + ', ' + pair[1]);
         }
-        let a = await axios.put(`http://3.38.192.170:8080/api/post/${props.post.id}`, formData,
+        let a = await axios.put(`http://3.38.192.170:8080/api/post/${postId}`, formData,
             {
                 headers: {
                     "Authorization": localStorage.getItem("Authorization"),   //accesstoken
@@ -60,7 +71,16 @@ const DetailCard = () => {
                     "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.
                 }
             });
-        //   dispatch(updatePost());
+        console.log(a.data.data);
+        dispatch(updatePost({
+            title: a?.data?.data?.title,
+            author: a?.data?.data?.username,
+            id: a?.data?.data?.postId,
+            imageUrl: a?.data?.data?.imageUrl,
+            commentList: data?.data?.data?.commentList,
+            content: post.content
+        }));
+
         setInput(!input)
     }
     const onChangeHandler = (event) => {
@@ -71,10 +91,10 @@ const DetailCard = () => {
         // input file에서 선택된 file을 img로 지정
         setImg(e.target.files[0]);
         // 이미지 파일이 아니면 이후 동작을 생략하고 경고문구 출력
-        if (!img.name.match(fileForm)) {
-            alert("이미지파일(.jpg, .png, .bmp)만 올려주세요.")
-            return
-        }
+        // if(!img.name.match(fileForm)){
+        //     alert("이미지파일(.jpg, .png, .bmp)만 올려주세요.")
+        //     return
+        // }
         console.log(img)
         // 폼데이터 형식 선언
         // api에서 요구하는 key값과 value값 지정 (key : "image", value: 이미지파일)
@@ -83,23 +103,22 @@ const DetailCard = () => {
         // 사진을 선택하고 사진선택기능 숨기기
         // 폼데이터 들어가는 형식을 보기위한 내용
     }
+    console.log(data?.data?.data?.imageUrl)
 
 
     const imageInput = useRef();
     const onClickImageUpload = () => {
         imageInput.current.click();
     };
-
-
     return (
         <>
             <StHeader>👊 당연한거 아니겠냐고 👊</StHeader>
             {!input ?
                 <StContainer>
                     <StImgBox>
-                        {props.post.imageUrl && (
+                        {data?.data?.data?.imageUrl && (
                             <img
-                                src={props.post.imageUrl}
+                                src={data?.data?.data?.imageUrl}
                                 width="80%"
                                 height="80%"
                                 alt="preview-img"
@@ -116,24 +135,24 @@ const DetailCard = () => {
                     <StContentBox>
                         <StContent>
                             <p style={{ marginRight: "10px", color: "white", padding: "5px" }}> 작성자 : </p>
-                            <p style={{ backgroundColor: "white", borderRadius: "5px", padding: "5px" }}> {props.post.author}</p>
+                            <p style={{ backgroundColor: "white", borderRadius: "5px", padding: "5px" }}> {data?.data?.data?.author}</p>
                         </StContent>
                         <StContent>
                             <p style={{ marginRight: "10px", color: "white", padding: "5px" }}> 제목 :</p>
-                            <p style={{ backgroundColor: "white", borderRadius: "5px", padding: "5px" }}> {props.post.title}</p>
+                            <p style={{ backgroundColor: "white", borderRadius: "5px", padding: "5px" }}> {data?.data?.data?.title}</p>
                         </StContent>
                         <StContent>
                             <p style={{ marginRight: "10px", color: "white", padding: "5px" }}> 내용 :</p>
-                            <p style={{ backgroundColor: "white", borderRadius: "5px", padding: "5px" }}>{props.post.content}</p>
+                            <p style={{ backgroundColor: "white", borderRadius: "5px", padding: "5px" }}>{data?.data?.data?.content}</p>
                         </StContent>
                     </StContentBox>
-                    {localStorage.getItem("username") === props.post.author ?
-                        < StBtnBox >
-                            <StButton onClick={() => setInput(!input)}>수정</StButton>
+                    {localStorage.getItem("username") === data?.data?.data?.author ?
+                        <StBtnBox>
+                            <StMiniButton onClick={() => setInput(!input)}>수정</StMiniButton>
 
-                            <StButton onClick={() => { onRemovePost() }} >삭제</StButton>
+                            <StMiniButton onClick={() => { onRemovePost() }} >삭제</StMiniButton>
 
-                            <StButton onClick={() => { navigate('/post') }}>또 인증하기!</StButton>
+                            <StMiniButton onClick={() => { navigate('/post') }}>또 인증하기!</StMiniButton>
                         </StBtnBox>
                         : null}
                 </StContainer>
@@ -145,7 +164,7 @@ const DetailCard = () => {
                         ref={imageInput}
                         style={{ display: "none" }}
                         onChange={onChange} />
-                    <StImgButton onClick={onClickImageUpload}>이미지<br />업로드하기🤳</StImgButton>
+                    <StImgButton onClick={onClickImageUpload}>이미지업로드하기🤳</StImgButton>
                     <StTittleInput
                         placeholder="제목"
                         type="text"
@@ -160,14 +179,15 @@ const DetailCard = () => {
                         value={post.content}
                         className="add-input"
                         onChange={onChangeHandler} />
-                    <StMiniButton onClick={() => { onUpdatePost() }}>수정완료</StMiniButton>
-                    <StMiniButton onClick={() => { setInput(!input) }}>취소</StMiniButton>
+                    <StButton onClick={() => { onUpdatePost() }}>수정</StButton>
+                    <StButton onClick={() => { setInput(!input) }}>취소</StButton>
                 </StContainer>}
         </>
     );
 };
 
 export default DetailCard;
+
 
 
 const StHeader = styled.div`
@@ -281,15 +301,16 @@ const StMiniButton = styled.button`
   border: none;
   background-color: whitesmoke;
   font-size: 20px;
-  width: 15%;
   margin-right: 2px;
   margin-left: 8px;
   text-align: center;
-  display: inline-block;
   justify-content: flex-end;
-  cursor: pointer;
+  padding: 3%;
   border-radius: 50px;
-  padding: 1%;
+  :hover{
+    background-color: #ff4d4d;
+    border: 5px solid #2381fc85;
+  }
 `;
 
 const StImgButton = styled.button`

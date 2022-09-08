@@ -42,6 +42,7 @@ const Card = forwardRef((props, ref) => {
                     </p>
 
 
+
                 </StBox>
             </StContainer>
         </div >

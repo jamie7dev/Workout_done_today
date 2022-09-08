@@ -34,23 +34,25 @@ const MiniCard = (props) => {
             <StContainer>
                 <StBox>
                     <div>
-                        <p style={{ color: "black" }}>
-                            작성자 : {props?.post?.author}
-                        </p>
-
-                        <p style={{ color: "black" }}>
-                            내용 : {props?.post?.content}
-                        </p>
+                        <StTitle style={{ color: "black" }}>
+                            {props?.post?.author}
+                        </StTitle>
                     </div>
-                    {localStorage.getItem("username") === props?.post?.author?
+                    <>:</>
                     <div>
-                        <StUdtBtn onClick={()=>{
-                            let change = prompt('수정할 내용을 입력해주세요.');
-                            onUpdateHandler(change);
-                            }}>수정</StUdtBtn>
-                        <StRmvBtn onClick={()=>onRemoveHandler()}>삭제</StRmvBtn>
+                        <StBody style={{ color: "black" }}>
+                            {props?.post?.content}
+                        </StBody>
                     </div>
-                     :null}
+                    {localStorage.getItem("username") === props?.post?.author ?
+                        <div>
+                            <StUdtBtn onClick={() => {
+                                let change = prompt('수정할 내용을 입력해주세요.');
+                                onUpdateHandler(change);
+                            }}>수정</StUdtBtn>
+                            <StRmvBtn onClick={() => onRemoveHandler()}>삭제</StRmvBtn>
+                        </div>
+                        : null}
                 </StBox>
             </StContainer>
         </div >
@@ -62,7 +64,7 @@ export default MiniCard;
 
 
 const StContainer = styled.div`
-    padding: 10px;
+    padding: 5px;
     display: flex;
 `;
 
@@ -71,25 +73,49 @@ const StBox = styled.div`
     margin: 0 auto;
     background-color: #8ebefd;
     width: 60%;
-    height: 20%;
     border-radius: 30px;
     max-height: 30vw;
     padding: 10px;
     display: flex;
     position: relative;
+    justify-content: center;
+`;
 
+const StTitle = styled.div`
+    margin-right: 20px;
+    font-size:25px;
+`;
+
+const StBody = styled.div`
+    margin-left: 20px;
+    font-size:25px;
 `;
 
 const StUdtBtn = styled.button`
     position: absolute;
     right: 60px;
-    bottom: 20px;
+    bottom: 10px;
     cursor: pointer;
+    margin-right: 5px;
+    border-radius: 5px;
+    border:none;
+    background-color: #b9b9fc;
+    font-size: 18px;
+:hover{
+    background-color: #fc8686;
+}
 `;
 
 const StRmvBtn = styled.button`
     position: absolute;
     right: 20px;
-    bottom: 20px;
+    bottom: 10px;
     cursor: pointer;
+    border-radius: 5px;
+    border:none;
+    background-color: #b9b9fc;
+    font-size: 18px;
+:hover{
+    background-color: #fc8686;
+}
 `;

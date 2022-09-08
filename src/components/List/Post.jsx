@@ -110,9 +110,8 @@ const Post = () => {
                 }
             })
         console.log(a);
-        // dispatch(createPost())
-        // window.location.href = '/main';
-        navigate('/main');
+        dispatch(createPost(a?.data?.data))
+        window.location.href = '/main';
 
 
     };

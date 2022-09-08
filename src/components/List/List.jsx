@@ -14,7 +14,7 @@ const List = () => {
   useEffect(() => {
     dispatch(__getPost());
   }, [dispatch])
-  console.log(post?.data)
+
   return (
     <>
       <div>
