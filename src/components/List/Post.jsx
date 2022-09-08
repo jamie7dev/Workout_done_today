@@ -108,9 +108,8 @@ const Post = () => {
             "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.
         }})
         console.log(a);
-        // dispatch(createPost())
-        // window.location.href = '/main';
-        navigate('/main');
+        dispatch(createPost(a?.data?.data))
+        window.location.href = '/main';
 
 
     };

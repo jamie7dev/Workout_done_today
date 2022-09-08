@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { logout } from '../../redux/modules/userSlice';
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -16,11 +15,11 @@ const Header = () => {
     navigate('/');
   };
 
+
   return (
     <>
       <HeaderStyle>
-        <StLink to="/main"><span>Home</span></StLink>
-        {/* <button onClick={() => {navigate('/main')}}>Home</button> */}
+        <StSpan onClick={() => navigate('/main')}>Home</StSpan>
         <StTitle>✊ 오늘 운동 완료 했니? ✊</StTitle>
 
         <StButton style={{ float: "right" }}
@@ -47,16 +46,14 @@ const HeaderStyle = styled.header`
   justify-content: space-between;
 `;
 
-const StLink = styled(Link)`
+const StSpan = styled.span`
   text-decoration: none;
   margin: 30px;
   width: 30px;
-  span {
-    font-size: 24px;
-    color: white;
-    background-color: #4B89DC;
-    border-radius: 5px;
-    padding: 22%;
+  font-size:30px;
+  :hover{
+    color:red;
+    font-size: 40px;
   }
 `;
 

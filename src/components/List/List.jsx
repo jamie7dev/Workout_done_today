@@ -11,9 +11,9 @@ const List = () => {
   const dispatch = useDispatch();
   const post = useSelector((state) => state.post)
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(__getPost());
-  },[dispatch])
+  }, [dispatch])
 
   return (
     <>
